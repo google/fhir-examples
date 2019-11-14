@@ -1,0 +1,10 @@
+bazel-bin
+bazel-fhir-example
+bazel-genfiles
+bazel-out
+bazel-testlogs
+proto/demo.json
+proto/demo.proto
+proto/demo_extensions.json
+.*
+!/.gitignore
