@@ -1,6 +1,6 @@
 
 # Usage Examples for FhirProto
-This repository contains examples of how to use the <strong>FhirProto<strong> platform at [github.com/google/fhir](github.com/google/fhir). This repo contains a <code>get-synthea.<span></span>sh</code> script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying. Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
+This repository contains examples of how to use the <strong>FhirProto</strong> platform at [github.com/google/fhir](github.com/google/fhir). This repo contains a <code>get-synthea.<span></span>sh</code> script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying. Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
 ## Setting Up Bazel
 
 FhirProto uses [Bazel](https://bazel.build/) as it’s dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. Installation is pretty simple: follow the steps [here](https://docs.bazel.build/versions/master/install.html) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.
