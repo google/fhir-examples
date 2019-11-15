@@ -46,5 +46,4 @@ curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos_
   curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos.sh > ~/bin/generate_protos.sh && \
   curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_definitions_and_protos.sh > ~/bin/generate_definitions_and_protos.sh && \
   chmod +x ~/bin/generate_protos.sh && chmod +x ~/bin/generate_definitions_and_protos.sh
-
 ```

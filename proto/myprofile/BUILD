@@ -8,7 +8,7 @@ load("@com_google_fhir//bazel:protogen.bzl", "gen_fhir_definitions_and_protos")
 load("@com_google_fhir//bazel:proto.bzl", "fhir_proto_library")
 
 gen_fhir_definitions_and_protos(
-    name = "demo",
+    name = "myprofile",
     additional_proto_imports = [
         "proto/r4/uscore.proto",
         "proto/r4/uscore_codes.proto",
@@ -23,7 +23,7 @@ gen_fhir_definitions_and_protos(
 
 fhir_proto_library(
     srcs = [
-        "demo.proto",
+        "myprofile.proto",
     ],
     proto_deps = [
         "@com_google_protobuf//:any_proto",
@@ -34,5 +34,5 @@ fhir_proto_library(
         "@com_google_fhir//proto/r4/core:datatypes_proto",
         "@com_google_fhir//proto/r4/core:extensions_proto",
     ],
-    proto_library_prefix = "demo",
+    proto_library_prefix = "myprofile",
 )
