@@ -42,8 +42,9 @@ This should parse all 1000 patients we generated into <strong>FhirProto</strong>
 ## Add Proto Generation scripts to your bin
 Finally, generating custom profiles and protos makes use of a couple of scripts defined by the FhirProto library. To add these to your `bin`, run
 ```
-wget -O ~/bin/generate_protos_utils.sh https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos_utils.sh && \
-    wget -O ~/bin/generate_protos.sh https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos.sh && \
-    wget -O ~/bin/generate_definitions_and_protos.sh https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_definitions_and_protos.sh && \
-    chmod +x ~/bin/generate_protos.sh && chmod +x ~/bin/generate_definitions_and_protos.sh
+curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos_utils.sh > ~/bin/generate_protos_utils.sh     && \
+  curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos.sh > ~/bin/generate_protos.sh && \
+  curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_definitions_and_protos.sh > ~/bin/generate_definitions_and_protos.sh && \
+  chmod +x ~/bin/generate_protos.sh && chmod +x ~/bin/generate_definitions_and_protos.sh
+
 ```
