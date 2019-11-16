@@ -17,8 +17,8 @@ gen_fhir_definitions_and_protos(
     package_deps = [
         "@com_google_fhir//spec:uscore_r4_package",
     ],
-    package_info = "demo_package_info.prototxt",
-    profiles = ["demo_profiles.prototxt"],
+    package_info = "package_info.prototxt",
+    profiles = ["profiles.prototxt"],
 )
 
 fhir_proto_library(

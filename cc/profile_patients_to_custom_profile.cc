@@ -22,7 +22,7 @@
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
 #include "proto/r4/core/resources/patient.pb.h"
-#include "proto/demo.pb.h"
+#include "proto/myprofile/myprofile.pb.h"
 #include "cc/example_utils.h"
 
 using std::string;
@@ -31,6 +31,18 @@ using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 using ::google::fhir::r4::core::Patient;
 
+// Example code for generating and using custom profile sets.
+// This uses the "MyProfile" profile set defined in //proto/myprofile
+// The Package is defined in package_info.prototxt, and a Patient profile
+// is defined in profiles.prototxt
+// For instructions on setting up your workspace, see the top-level README.md
+//
+// To generate the myprofile.proto, run
+// generate_definitions_and_protos.sh //proto/myprofile:myprofile
+//
+// To run:
+// bazel build //cc:ProfilePatientsToCustomProfile
+// bazel-bin/cc/ProfilePatientsToCustomProfile $WORKSPACE
 int main(int argc, char** argv) {
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
@@ -39,11 +51,20 @@ int main(int argc, char** argv) {
   		fhir_examples::ReadNdJsonFile<Patient>(
   			  time_zone, absl::StrCat(argv[1], "/ndjson/Patient.fhir.ndjson"));
 
-  std::vector<fhir_examples::demo::DemoPatient> demo_patients;
+  std::vector<fhirexamples::myprofile::DemoPatient> demo_patients;
   for (const Patient& patient : patients) {
     demo_patients.emplace_back();
     google::fhir::ConvertToProfileR4(patient, &demo_patients.back());
   }
 
-  std::cout << demo_patients.front().DebugString() << std::endl;
+  const fhirexamples::myprofile::DemoPatient& example_patient =
+      demo_patients.front();
+  std::cout << example_patient.DebugString() << std::endl;
+
+  std::cout << "\n\n" << example_patient.name(0).given(0).value() << " "
+            << example_patient.name(0).family().value()
+            << " has race: "
+            << example_patient.race().text().value()
+            << " and lives in " << example_patient.birth_place().city().value()
+            << ", " << example_patient.birth_place().state().value() << ".\n\n";
 }

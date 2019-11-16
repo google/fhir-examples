@@ -32,6 +32,12 @@ using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 using ::google::fhir::r4::core::Patient;
 using ::google::fhir::r4::uscore::USCorePatientProfile;
 
+// Example code for converting core Patient protos to USCore Patient protos.
+// For instructions on setting up your workspace, see the top-level README.md
+//
+// To run:
+// bazel build //cc:ProfilePatientsToUsCore
+// bazel build //cc:ProfilePatientsToUsCore $WORKSPACE
 int main(int argc, char** argv) {
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));

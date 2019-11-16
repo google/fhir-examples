@@ -41,7 +41,7 @@ cc_binary(
     srcs = ["profile_patients_to_custom_profile.cc"],
     deps = [
         ":example_utils",
-        "//proto:demo_cc_proto",
+        "//proto/myprofile:myprofile_cc_proto",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
         "@com_google_absl//absl/strings",
