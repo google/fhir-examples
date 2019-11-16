@@ -1,5 +1,6 @@
 bazel-bin
 bazel-fhir-example
+bazel-fhir-examples
 bazel-genfiles
 bazel-out
 bazel-testlogs

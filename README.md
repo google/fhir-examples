@@ -8,7 +8,7 @@ FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build 
 __Important:__ Remember, you cannot use Bazel 1.X yet - if you do, you will get very strange error messages like "This attribute was removed".  You can always check what version of Bazel you have by running `bazel --version`
 ## Setting Up the Example Repository
 
-Next, we’ll clone the example repository into git directory. If you don’t have a directory you already use for git code, `~/git` is perfectly reasonable:
+Next, we’ll clone the example repository into a git directory. If you don’t have a directory you already use for git code, `~/git` is perfectly reasonable:
 ```
 mkdir ~/git
 cd ~/git

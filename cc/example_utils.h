@@ -31,7 +31,8 @@ using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::StatusOr;
 
 template <typename R>
-std::vector<R> ReadNdJsonFile(const absl::TimeZone& time_zone, std::string filename) {
+std::vector<R> ReadNdJsonFile(
+    const absl::TimeZone& time_zone, std::string filename) {
   std::ifstream read_stream;
   read_stream.open(absl::StrCat(filename));
 
