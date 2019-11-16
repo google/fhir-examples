@@ -21,6 +21,8 @@
 #include "absl/time/time.h"
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
+#include "google/fhir/status/status.h"
+#include "google/fhir/resource_validation.h"
 #include "proto/r4/core/resources/patient.pb.h"
 #include "proto/r4/uscore.pb.h"
 #include "cc/example_utils.h"
@@ -55,12 +57,19 @@ int main(int argc, char** argv) {
   std::vector<USCorePatientProfile> uscore_patients;
   for (const Patient& patient : patients) {
     uscore_patients.emplace_back();
-    google::fhir::ConvertToProfileR4(patient, &uscore_patients.back());
+    google::fhir::Status status = 
+        google::fhir::ConvertToProfileR4(patient, &uscore_patients.back());
+    if (!status.ok()) {
+      std::cout << "Patient " << patient.identifier(0).value().value()
+                << " is invalid for US Core profile: "
+                << status.error_message() << std::endl;
+    }
   }
 
-
   const USCorePatientProfile& example_patient = uscore_patients.front();
+
   std::cout << example_patient.DebugString() << std::endl;
+
   std::cout << "\n\n" << example_patient.name(0).given(0).value() << " "
             << example_patient.name(0).family().value()
             << " has race: "

@@ -9,6 +9,7 @@ cc_library(
     hdrs = ["example_utils.h"],
     deps = [
         "@com_google_fhir//cc/google/fhir:json_format",
+        "@com_google_fhir//cc/google/fhir/status:statusor",
     ],
 )
 
@@ -29,6 +30,8 @@ cc_binary(
     deps = [
         ":example_utils",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
+        "@com_google_fhir//cc/google/fhir:resource_validation",
+        "@com_google_fhir//cc/google/fhir/status:status",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
         "@com_google_fhir//proto/r4:uscore_cc_proto",
         "@com_google_absl//absl/strings",
@@ -42,6 +45,21 @@ cc_binary(
     deps = [
         ":example_utils",
         "//proto/myprofile:myprofile_cc_proto",
+        "@com_google_fhir//cc/google/fhir/r4:profiles",
+        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
+        "@com_google_absl//absl/strings",
+        "@com_google_absl//absl/time",
+    ],
+)
+
+cc_binary(
+    name = "ValidatePatients",
+    srcs = ["validate_patients.cc"],
+    deps = [
+        ":example_utils",
+        "@com_google_fhir//proto/r4:uscore_cc_proto",
+        "@com_google_fhir//cc/google/fhir:resource_validation",
+        "@com_google_fhir//cc/google/fhir/status:status",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
         "@com_google_absl//absl/strings",

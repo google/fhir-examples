@@ -29,10 +29,11 @@ cd synthea
 
 popd
 
-
 mkdir $1/bundles
 cp $1/synthea/output/fhir/*.json $1/bundles/
 
+echo 'Finished generating Synthea dataset.  Running SplitBundle...'
 mkdir $1/ndjson/
 bazel build @com_google_fhir//java:SplitBundle
 bazel-bin/external/com_google_fhir/java/SplitBundle $1/ndjson $1/bundles/*.json
+echo 'Done\n'
