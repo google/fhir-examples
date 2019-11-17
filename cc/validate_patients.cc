@@ -51,10 +51,9 @@ int main(int argc, char** argv) {
       fhir_examples::ReadNdJsonFile<USCorePatientProfile>(
           time_zone, absl::StrCat(argv[1], "/ndjson/Patient.fhir.ndjson"));
 
-  // All of the synthea patients are valid USCore Patients.
+  // All of the elements of patients
   // We know this is true, because if any failed to meet the requirements of
-  // that profile, they would have failed the "ValueOrDie" check in
-  // ReadNdJsonFile.
+  // that profile, they would have failed the status check in ReadNdJsonFile.
   // To demonstrate validation, let's make some of them invalid.
   std::default_random_engine generator;
   std::uniform_real_distribution<> distribution(0, 1);
