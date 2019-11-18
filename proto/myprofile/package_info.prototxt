@@ -2,3 +2,4 @@ proto_package: "fhirexamples.myprofile"
 java_proto_package: "com.mycompany.fhirexamples.myprofile"
 fhir_version: R4
 base_url: "https://mycompany.com/fhir/myprofile"
+publisher: "Example Company LLC"

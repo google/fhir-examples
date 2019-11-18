@@ -1,0 +1,33 @@
+complex_extension {
+  element_data {
+    name: "Favorites"
+    description: "complex extension"
+  }
+
+  simple_field {
+    element_data {
+      name: "favoriteNumber"
+    }
+    type: "integer"
+  }
+
+  complex_field {
+    element_data {
+      name: "petNames"
+    }
+
+    simple_field {
+      element_data {
+        name: "cat"
+      }
+      type: "string"
+    }
+
+    simple_field {
+      element_data {
+        name: "dog"
+      }
+      type: "string"
+    }
+  }
+}

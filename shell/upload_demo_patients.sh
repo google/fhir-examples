@@ -13,15 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# This example uploads the analyic data in $WORKSPACE/analytic to BigQuery
+# After running this, you can run
+
 if [[ $# -eq 0 ]] ; then
     echo 'Missing argument: scratch directory'
     exit 1
 fi
 
-# Note: requires Cloud Bigquery SDK, see https://cloud.google.com/bigquery/quickstart-command-line
-bq mk synthea
+# Note: This example requires a BigQuery project, and the bq cli tool to be
+# installed.  See links in the README.md
+bq mk fhirexamples
 
-for i in $(basename -a -s.analytic.ndjson $1/analytic/*.analytic.ndjson); do
-  echo "Uploading $i..."
-  bq load --source_format=NEWLINE_DELIMITED_JSON --schema=$1/analytic/$i.schema.json synthea.$i $1/analytic/$i.analytic.ndjson
-done
+RESOURCE_NAME="DemoPatient"
+echo "Uploading $i..."
+bq load \
+  --source_format=NEWLINE_DELIMITED_JSON \
+  --schema=$1/analytic/$RESOURCE_NAME.schema.json \
+  fhirexamples.$RESOURCE_NAME $1/analytic/$RESOURCE_NAME.analytic.ndjson

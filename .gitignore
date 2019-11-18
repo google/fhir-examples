@@ -6,6 +6,7 @@ bazel-out
 bazel-testlogs
 proto/demo.json
 proto/demo.proto
+proto/demo_proto.proto
 proto/demo_extensions.json
 .*
 !/.gitignore

@@ -29,6 +29,7 @@ java_binary(
     deps = [
         ":example_utils",
         "@com_google_fhir//java:common",
+        "@com_google_fhir//java:resource_validator",
         "@com_google_fhir//proto/r4/core/resources:patient_java_proto",
         "@com_google_fhir//proto/r4/core:datatypes_java_proto",
     ],

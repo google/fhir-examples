@@ -7,18 +7,8 @@
         "id": "DemoPatient",
         "url": "https://mycompany.com/fhir/myprofile/DemoPatient",
         "name": "DemoPatient",
-        "date": "2019-11-15",
-        "publisher": "",
-        "contact": [
-          {
-            "telecom": [
-              {
-                "system": "url",
-                "value": ""
-              }
-            ]
-          }
-        ],
+        "date": "2019-11-17",
+        "publisher": "Example Company LLC",
         "description": "Extension of US Core Patient for FHIR Profile demo",
         "fhirVersion": "4.0.0",
         "kind": "resource",

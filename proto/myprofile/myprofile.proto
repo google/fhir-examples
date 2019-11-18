@@ -224,3 +224,40 @@ message DemoPatient {
   .google.fhir.r4.core.Address birth_place = 29 [(.google.fhir.proto.fhir_inlined_extension_url) = "http://hl7.org/fhir/StructureDefinition/patient-birthPlace", (.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
 }
 
+// Auto-generated from StructureDefinition for Favorites.
+// complex extension.
+// See https://mycompany.com/fhir/myprofile/Favorites
+message Favorites {
+  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
+  option (.google.fhir.proto.fhir_profile_base) = "http://hl7.org/fhir/StructureDefinition/Extension";
+  option (.google.fhir.proto.fhir_structure_definition_url) = "https://mycompany.com/fhir/myprofile/Favorites";
+  option (.google.fhir.proto.fhir_path_message_constraint) = "extension.exists() != value.exists()";
+
+  // Unique id for inter-element referencing
+  .google.fhir.r4.core.String id = 1;
+
+  // Optional Extensions Element
+  .google.fhir.r4.core.Integer favorite_number = 4 [(.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
+
+  // Optional Extensions Element
+  message PetNames {
+    option (.google.fhir.proto.fhir_path_message_constraint) = "extension.exists() != value.exists()";
+
+    // Unique id for inter-element referencing
+    .google.fhir.r4.core.String id = 1;
+
+    // Extension.extension.extension not present on profile.
+    reserved 2;
+
+    // Extension.extension.value[x] not present on profile.
+    reserved 3;
+
+    // Optional Extensions Element
+    .google.fhir.r4.core.String cat = 4 [(.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
+
+    // Optional Extensions Element
+    .google.fhir.r4.core.String dog = 5 [(.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
+  }
+  PetNames pet_names = 5;
+}
+

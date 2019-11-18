@@ -12,7 +12,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 
-package com.google.fhir.examples;
+package com.google.fhirexamples;
 
 import com.mycompany.fhirexamples.myprofile.DemoPatient;
 import com.google.api.client.json.gson.GsonFactory;
@@ -35,27 +35,17 @@ public class GenerateBigQuerySchema {
   private static final Descriptor[] DESCRIPTORS = {DemoPatient.getDescriptor()};
 
   public static void main(String[] args) throws IOException {
-    // We create one schema per output resource type.
-    Map<String, TableSchema> schema = new HashMap<>();
-
-    process(DESCRIPTORS, schema);
-
-    // Write the schemas to disk.
-    GsonFactory gsonFactory = new GsonFactory();
-    for (String resourceName : schema.keySet()) {
-      String filename = Paths.get(args[0], resourceName + ".schema.json").toString();
-      com.google.common.io.Files.asCharSink(new File(filename), StandardCharsets.UTF_8)
-          .write(gsonFactory.toPrettyString(schema.get(resourceName).getFields()));
-    }
-  }
-
-  private static void process(Descriptor[] descriptors, Map<String, TableSchema> schema) {
-    for (Descriptor descriptor : descriptors) {
+    for (Descriptor descriptor : DESCRIPTORS) {
       String resourceName = descriptor.getName();
-      if (!schema.containsKey(resourceName)) {
-        System.out.println("Processing " + resourceName + "...");
-        schema.put(resourceName, BigQuerySchema.fromDescriptor(descriptor));
-      }
+      String filename = Paths.get(args[0], "analytic", resourceName + ".schema.json").toString();
+
+      System.out.println("Generating " + filename + "...");
+      TableSchema schema = BigQuerySchema.fromDescriptor(descriptor);
+
+      GsonFactory gsonFactory = new GsonFactory();
+      com.google.common.io.Files.asCharSink(
+          new File(filename), StandardCharsets.UTF_8)
+              .write(gsonFactory.toPrettyString(schema.getFields()));
     }
   }
 }

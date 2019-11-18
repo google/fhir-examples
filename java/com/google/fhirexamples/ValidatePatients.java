@@ -19,6 +19,7 @@ package com.google.fhirexamples;
 import com.google.fhir.r4.core.Patient;
 import com.google.fhir.r4.core.Reference;
 import com.google.fhir.common.InvalidFhirException;
+import com.google.fhir.common.ResourceValidator;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;

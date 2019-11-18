@@ -26,10 +26,10 @@
 using std::string;
 
 using ::google::fhir::r4::core::Patient;
-// using ::google::fhir::PrintFhirPrimitive;
+using ::google::fhir::PrintFhirPrimitive;
 using ::google::fhir::JsonFhirStringToProto;
 
-// Example code for using JsonFormat to move back and forth from 
+// Example code for using JsonFormat to move back and forth from
 // FHIR JSON <--> FHIR Proto
 //
 // To run:
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
   }
 
   const Patient& example_patient = result.front();
-   
+
   // See first record in FhirProto form
   std::cout << example_patient.DebugString() << std::endl;
 
@@ -66,12 +66,12 @@ int main(int argc, char** argv) {
   std::cout << example_patient.name(0).given(0).value() << " "
             << example_patient.name(0).family().value()
             << " was born on "
-            // << PrintFhirPrimitive(example_patient.birth_date());
+            << PrintFhirPrimitive(example_patient.birth_date()).ValueOrDie()
             << std::endl;
 
 
   // Uncomment to see the first record converted back to FHIR JSON form
-  // const std::string first_record_as_json = 
+  // const std::string first_record_as_json =
   //     ::google::fhir::PrettyPrintFhirJsonString().ValueOrDie();
   // std::cout << first_record_as_json
 }

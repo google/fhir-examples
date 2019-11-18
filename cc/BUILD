@@ -19,7 +19,6 @@ cc_binary(
     deps = [
         ":example_utils",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
-        "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
     ],
 )
@@ -34,7 +33,6 @@ cc_binary(
         "@com_google_fhir//cc/google/fhir/status:status",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
         "@com_google_fhir//proto/r4:uscore_cc_proto",
-        "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
     ],
 )
@@ -47,7 +45,6 @@ cc_binary(
         "//proto/myprofile:myprofile_cc_proto",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
-        "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
     ],
 )
@@ -62,7 +59,18 @@ cc_binary(
         "@com_google_fhir//cc/google/fhir/status:status",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
         "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
-        "@com_google_absl//absl/strings",
+        "@com_google_absl//absl/time",
+    ],
+)
+
+cc_binary(
+    name = "PrintToAnalyticNdJson",
+    srcs = ["print_to_analytic_ndjson.cc"],
+    deps = [
+        ":example_utils",
+        "//proto/myprofile:myprofile_cc_proto",
+        "@com_google_fhir//cc/google/fhir/r4:profiles",
+        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
         "@com_google_absl//absl/time",
     ],
 )

@@ -13,7 +13,9 @@ gen_fhir_definitions_and_protos(
         "proto/r4/uscore.proto",
         "proto/r4/uscore_codes.proto",
     ],
-    extensions = [],
+    extensions = [
+        "extensions.prototxt"
+    ],
     package_deps = [
         "@com_google_fhir//spec:uscore_r4_package",
     ],

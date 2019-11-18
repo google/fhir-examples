@@ -1,6 +1,8 @@
 
 # Usage Examples for FhirProto
 This repository contains examples of how to use the __FhirProto__ platform at [github.com/google/fhir](github.com/google/fhir). This repo contains a `generate-synthea.sh` script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying. Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
+
+The rest of this README contains instructions for setting up an environment for working with __FhirProto__.  For instructions on running the examples, check out [EXAMPLES.md](github.com/google/fhir-examples/blob/master/EXAMPLES.md).
 ## Setting Up Bazel
 
 FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. Installation is pretty simple, but there is one wrinkle: __Tensorflow does not yet support Bazel 1.X, so you need to use a 0.X version.  We recommend [0.29.1](https://github.com/bazelbuild/bazel/releases/tag/0.29.1), the latest 0.X release__.  Other than that, follow the steps [here](https://docs.bazel.build/versions/master/install.html) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
@@ -40,10 +42,13 @@ bazel-bin/cc/ParsePatient $WORKSPACE
 
 This should parse all 1000 patients we generated into __FhirProto__, and print one out as an example.
 ## Add Proto Generation scripts to your bin
-Finally, generating custom profiles and protos makes use of a couple of scripts defined by the FhirProto library. To add these to your `bin`, run
+Generating custom profiles and protos makes use of a couple of scripts defined by the FhirProto library. To add these to your `bin`, run
 ```
 curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos_utils.sh > ~/bin/generate_protos_utils.sh     && \
   curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos.sh > ~/bin/generate_protos.sh && \
   curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_definitions_and_protos.sh > ~/bin/generate_definitions_and_protos.sh && \
   chmod +x ~/bin/generate_protos.sh && chmod +x ~/bin/generate_definitions_and_protos.sh
 ```
+
+## BigQuery
+Finally, some examples show how to use [Analytic SQL-on-FHIR](https://github.com/FHIR/sql-on-fhir/blob/master/sql-on-fhir.md) with [BigQuery](https://cloud.google.com/bigquery/), which is free to set up and provides a [sandbox](https://cloud.google.com/bigquery/docs/sandbox) environment with pretty good quotas.  There are some examples in [shell directory](https://github.com/google/fhir-examples/tree/master/shell) that show how to upload data to BigQuery using th [bq command line tool](https://cloud.google.com/bigquery/docs/bq-command-line-tool).  Once it's there, you can either query it from the [Cloud Console](https://console.cloud.google.com/bigquery), or use the `bq` tool as is done in [run_queries.sh](https://github.com/google/fhir-examples/blob/master/shell/).
