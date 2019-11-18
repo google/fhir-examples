@@ -1,3 +1,11 @@
+simple_extension {
+  element_data {
+    name: "LikesPie"
+    description: "Whether or not the patient likes pie."
+  }
+  type: "boolean"
+}
+
 complex_extension {
   element_data {
     name: "Favorites"
@@ -31,3 +39,4 @@ complex_extension {
     }
   }
 }
+

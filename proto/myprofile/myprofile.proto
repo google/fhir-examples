@@ -222,6 +222,28 @@ message DemoPatient {
 
   // Patient's Birth Place
   .google.fhir.r4.core.Address birth_place = 29 [(.google.fhir.proto.fhir_inlined_extension_url) = "http://hl7.org/fhir/StructureDefinition/patient-birthPlace", (.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
+
+  // Info about the patient's favorites
+  Favorites favorites = 30 [(.google.fhir.proto.fhir_inlined_extension_url) = "https://mycompany.com/fhir/myprofile/Favorites", (.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
+
+  // Optional Extensions Element
+  .google.fhir.r4.core.Boolean likes_pie = 31 [(.google.fhir.proto.fhir_inlined_extension_url) = "https://mycompany.com/fhir/myprofile/LikesPie", (.google.fhir.proto.fhir_path_constraint) = "extension.exists() != value.exists()"];
+}
+
+// Auto-generated from StructureDefinition for LikesPie.
+// Whether or not the patient likes pie.
+// See https://mycompany.com/fhir/myprofile/LikesPie
+message LikesPie {
+  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
+  option (.google.fhir.proto.fhir_profile_base) = "http://hl7.org/fhir/StructureDefinition/Extension";
+  option (.google.fhir.proto.fhir_structure_definition_url) = "https://mycompany.com/fhir/myprofile/LikesPie";
+  option (.google.fhir.proto.fhir_path_message_constraint) = "extension.exists() != value.exists()";
+
+  // Unique id for inter-element referencing
+  .google.fhir.r4.core.String id = 1;
+
+  // Value of extension
+  .google.fhir.r4.core.Boolean value_boolean = 3;
 }
 
 // Auto-generated from StructureDefinition for Favorites.

@@ -14,6 +14,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <string>
 #include <vector>
 
@@ -29,6 +30,12 @@ using std::string;
 
 using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 using ::fhirexamples::myprofile::DemoPatient;
+
+double Rand() {
+  static std::default_random_engine generator;
+  static std::uniform_real_distribution<> distribution(0, 1);
+  return distribution(generator);
+}
 
 // This is a comprehensive example that is meant to be run last of the C++
 // examples!
@@ -48,22 +55,59 @@ using ::fhirexamples::myprofile::DemoPatient;
 // Next, generate the analytic schema for demo patient:
 // bazel build //java:GenerateBigQuerySchema.java $WORKSPACE
 //
-// Then, generate
+// Finally, upload the DemoPatients to BigQuery:
+// shell/upload_demo_patients.sh
+//
+// Now, you can run queries like
 int main(int argc, char** argv) {
   const std::string workspace = argv[1];
 
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
 
-  const std::vector<DemoPatient>& patients =
+  std::vector<DemoPatient> patients =
       fhir_examples::ReadNdJsonFile<DemoPatient>(
           time_zone, absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   std::ofstream write_stream;
   write_stream.open(absl::StrCat(workspace, "/analytic/DemoPatient.analytic.ndjson"));
 
-  for (const DemoPatient& patient : patients) {
-    write_stream << PrintFhirToJsonStringForAnalytics(patient).ValueOrDie();
+
+  for (DemoPatient& patient : patients) {
+    if (Rand() > .15) {
+      patient.mutable_likes_pie()->set_value(true);
+    }
+
+    patient.mutable_favorites()
+           ->mutable_favorite_number()
+           ->set_value((int) (Rand() * 100));
+
+    if (Rand() > .6) {
+      patient.mutable_favorites()
+             ->mutable_pet_names()
+             ->mutable_dog()
+             ->set_value("Fido");
+    } else {
+      patient.mutable_favorites()
+             ->mutable_pet_names()
+             ->mutable_dog()
+             ->set_value("Spot");
+    }
+
+    if (Rand() > .6) {
+      patient.mutable_favorites()
+             ->mutable_pet_names()
+             ->mutable_cat()
+             ->set_value("Pippen");
+    } else {
+      patient.mutable_favorites()
+             ->mutable_pet_names()
+             ->mutable_cat()
+             ->set_value("Ivan");
+    }
+
+    write_stream <<
+        PrintFhirToJsonStringForAnalytics(patient).ValueOrDie();
     write_stream << "\n";
   }
   write_stream.close();

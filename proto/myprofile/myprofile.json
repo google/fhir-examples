@@ -3394,6 +3394,60 @@
                 }
               ],
               "isModifier": false
+            },
+            {
+              "id": "Patient.extension:favorites",
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+                  "valueCode": "normative"
+                },
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+                  "valueCode": "4.0.0"
+                }
+              ],
+              "path": "Patient.extension",
+              "sliceName": "favorites",
+              "short": "Info about the patient's favorites",
+              "definition": "Info about the patient's favorites",
+              "min": 0,
+              "max": "1",
+              "base": {
+                "path": "Extension",
+                "min": 0,
+                "max": "*"
+              },
+              "type": [
+                {
+                  "code": "Extension",
+                  "profile": [
+                    "ttps://mycompany.com/fhir/myprofile/Favorites"
+                  ]
+                }
+              ],
+              "condition": [
+                "ele-1"
+              ],
+              "constraint": [
+                {
+                  "key": "ele-1",
+                  "severity": "error",
+                  "human": "All FHIR elements must have a @value or children",
+                  "expression": "hasValue() or (children().count() > id.count())",
+                  "xpath": "@value|f:*|h:div",
+                  "source": "Element"
+                },
+                {
+                  "key": "ext-1",
+                  "severity": "error",
+                  "human": "Must have either extensions or value[x], not both",
+                  "expression": "extension.exists() != value.exists()",
+                  "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])",
+                  "source": "Extension"
+                }
+              ],
+              "isModifier": false
             }
           ]
         },
@@ -3484,6 +3538,53 @@
                   "code": "Extension",
                   "profile": [
                     "http://hl7.org/fhir/StructureDefinition/patient-birthPlace"
+                  ]
+                }
+              ],
+              "condition": [
+                "ele-1"
+              ],
+              "constraint": [
+                {
+                  "key": "ele-1",
+                  "severity": "error",
+                  "human": "All FHIR elements must have a @value or children",
+                  "expression": "hasValue() or (children().count() > id.count())",
+                  "xpath": "@value|f:*|h:div",
+                  "source": "Element"
+                },
+                {
+                  "key": "ext-1",
+                  "severity": "error",
+                  "human": "Must have either extensions or value[x], not both",
+                  "expression": "extension.exists() != value.exists()",
+                  "xpath": "exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])",
+                  "source": "Extension"
+                }
+              ]
+            },
+            {
+              "id": "Patient.extension:favorites",
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+                  "valueCode": "normative"
+                },
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+                  "valueCode": "4.0.0"
+                }
+              ],
+              "path": "Patient.extension",
+              "sliceName": "favorites",
+              "short": "Info about the patient's favorites",
+              "definition": "Info about the patient's favorites",
+              "max": "1",
+              "type": [
+                {
+                  "code": "Extension",
+                  "profile": [
+                    "ttps://mycompany.com/fhir/myprofile/Favorites"
                   ]
                 }
               ],

@@ -4,9 +4,9 @@ bazel-fhir-examples
 bazel-genfiles
 bazel-out
 bazel-testlogs
-proto/demo.json
-proto/demo.proto
-proto/demo_proto.proto
-proto/demo_extensions.json
+proto/myprofile.json
+proto/myprofile.proto
+proto/myprofile_proto.proto
+proto/myprofile_extensions.json
 .*
 !/.gitignore

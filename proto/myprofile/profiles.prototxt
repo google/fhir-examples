@@ -9,8 +9,23 @@ profile {
     element_data {
       name: "birthPlace"
       description: "Patient's Birth Place"
-      size_restriction: OPTIONAL
     }
     url: "http://hl7.org/fhir/StructureDefinition/patient-birthPlace"
+  }
+
+  extension_slice {
+    element_data {
+      name: "favorites"
+      description: "Info about the patient's favorites"
+    }
+    url: "https://mycompany.com/fhir/myprofile/Favorites"
+  }
+
+  extension_slice {
+    element_data {
+      name: "likesPie"
+      description: "Whether or not the patient likes pie."
+    }
+    url: "https://mycompany.com/fhir/myprofile/LikesPie"
   }
 }
