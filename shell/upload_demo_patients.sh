@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # This example uploads the analyic data in $WORKSPACE/analytic to BigQuery
-# After running this, you can run
 
 if [[ $# -eq 0 ]] ; then
     echo 'Missing argument: scratch directory'

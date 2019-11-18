@@ -42,6 +42,7 @@ using ::google::fhir::r4::uscore::USCorePatientProfile;
 //
 // where $WORKSPACE is the location of a synthea dataset.
 // For instructions on setting up your workspace, see the top-level README.md
+
 int main(int argc, char** argv) {
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));

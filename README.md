@@ -53,4 +53,5 @@ curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos_
 ## BigQuery
 Finally, some examples show how to use [Analytic SQL-on-FHIR](https://github.com/FHIR/sql-on-fhir/blob/master/sql-on-fhir.md) with [BigQuery](https://cloud.google.com/bigquery/), which is free to set up and provides a [sandbox](https://cloud.google.com/bigquery/docs/sandbox) environment with pretty good quotas.  There are some examples in [shell directory](https://github.com/google/fhir-examples/tree/master/shell) that show how to upload data to BigQuery using th [bq command line tool](https://cloud.google.com/bigquery/docs/bq-command-line-tool).  Once it's there, you can either query it from the [Cloud Console](https://console.cloud.google.com/bigquery), or use the `bq` tool as is done in [run_queries.sh](https://github.com/google/fhir-examples/blob/master/shell/).
 
+## Trademark
 FHIR® is the registered trademark of HL7 and is used with the permission of HL7. Use of the FHIR trademark does not constitute endorsement of this product by HL7

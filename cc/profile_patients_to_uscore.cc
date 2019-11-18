@@ -40,6 +40,7 @@ using ::google::fhir::r4::uscore::USCorePatientProfile;
 // To run:
 // bazel build //cc:ProfilePatientsToUsCore
 // bazel build //cc:ProfilePatientsToUsCore $WORKSPACE
+
 int main(int argc, char** argv) {
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
@@ -57,7 +58,7 @@ int main(int argc, char** argv) {
   std::vector<USCorePatientProfile> uscore_patients;
   for (const Patient& patient : patients) {
     uscore_patients.emplace_back();
-    google::fhir::Status status = 
+    google::fhir::Status status =
         google::fhir::ConvertToProfileR4(patient, &uscore_patients.back());
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()

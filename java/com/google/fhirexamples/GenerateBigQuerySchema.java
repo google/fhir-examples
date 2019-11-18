@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Utility for generating BigQuery schema from descriptors. TODO: convert this to
- * dynamically load protos from a .proto filepath flag.
+ * Utility for generating BigQuery schema from descriptors.
+ * Generated schema will be located in $WORKSPACE/analytic/[Resource].schema,json
  */
 public class GenerateBigQuerySchema {
 

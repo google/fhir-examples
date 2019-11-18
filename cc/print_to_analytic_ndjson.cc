@@ -59,6 +59,8 @@ double Rand() {
 // shell/upload_demo_patients.sh
 //
 // Now, you can run queries like
+// SELECT favorites, likesPie FROM `$PROJECT.fhirexamples.DemoPatient` LIMIT 10
+
 int main(int argc, char** argv) {
   const std::string workspace = argv[1];
 
@@ -70,7 +72,8 @@ int main(int argc, char** argv) {
           time_zone, absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   std::ofstream write_stream;
-  write_stream.open(absl::StrCat(workspace, "/analytic/DemoPatient.analytic.ndjson"));
+  write_stream.open(
+      absl::StrCat(workspace, "/analytic/DemoPatient.analytic.ndjson"));
 
 
   for (DemoPatient& patient : patients) {

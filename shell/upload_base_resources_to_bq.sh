@@ -14,7 +14,9 @@
 # limitations under the License.
 
 # This example uploads the analyic data in $WORKSPACE/analytic to BigQuery
-# After running this, you can run
+# After running this, you can run run_queries.sh to issue some quieries from the
+# command line, or query from the BigQuery console at
+# https://console.cloud.google.com/bigquery
 
 if [[ $# -eq 0 ]] ; then
     echo 'Missing argument: scratch directory'
@@ -23,7 +25,7 @@ fi
 
 # Note: This example requires a BigQuery project, and the bq cli tool to be
 # installed.  See links in the README.md
-bq mk synthea
+bq mk fhirexamples
 
 for i in $(basename -a -s.analytic.ndjson $1/analytic/*.analytic.ndjson); do
   echo "Uploading $i..."

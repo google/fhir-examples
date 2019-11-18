@@ -43,6 +43,7 @@ using ::google::fhir::r4::core::Patient;
 // To run:
 // bazel build //cc:ProfilePatientsToCustomProfile
 // bazel-bin/cc/ProfilePatientsToCustomProfile $WORKSPACE
+
 int main(int argc, char** argv) {
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
