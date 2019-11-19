@@ -15,9 +15,7 @@ Now, just invoke the generate_definitions_and_protos.sh script on the `gen_fhir_
 generate_definitions_and_protos.sh //proto:myprofile
 ```
 
-You will see 3 files get generated: 
+You will see 3 files get generated:
 * __myprofile.json__ - Structure Definitions for new __Profiles__, just MyPatient in this case
-* __myprofile_extensions.json__ - Structure Definitions for new __Extensions__.  This is empty because we haven't defined any yet.
-* __myprofile.proto__ - The newly-generated __Proto__ file.  Currently just contains a 
-
-myprofile.json contains the new Patient profile.  myprofile_extensions.json is empty because we haven't defined any extensions.  myprofile.proto contains the newly-generated myprofilePatient proto.  If we'd specified any extensions to generate, there would also be a myprofile_extensions.proto file.
+* __myprofile_extensions.json__ - Structure Definitions for new __Extensions__.
+* __myprofile.proto__ - The newly-generated __Proto__ file.

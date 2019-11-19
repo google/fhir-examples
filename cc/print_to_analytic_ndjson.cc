@@ -79,6 +79,8 @@ int main(int argc, char** argv) {
   for (DemoPatient& patient : patients) {
     if (Rand() > .15) {
       patient.mutable_likes_pie()->set_value(true);
+    } else {
+      patient.mutable_likes_pie()->set_value(false);
     }
 
     patient.mutable_favorites()
@@ -114,4 +116,9 @@ int main(int argc, char** argv) {
     write_stream << "\n";
   }
   write_stream.close();
+
+  // Finally, let's just print out one example in FHIR JSON to see what that
+  // looks like:
+  std::cout << google::fhir::PrettyPrintFhirToJsonString(patients.front()).ValueOrDie()
+            << std::endl;
 }

@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Example code for using JsonFormat to move back and forth from 
+ * Example code for using JsonFormat to move back and forth from
  * FHIR JSON <--> FHIR Proto
  *
  * To run:
  * bazel build //java:ParsePatients
- * bazel-bin/java/ParsePatient $WORKSPACE
+ * bazel-bin/java/ParsePatients $WORKSPACE
  *
  * where $WORKSPACE is the location of a synthea dataset.
  * For instructions on setting up your workspace, see the top-level README.md
@@ -69,6 +69,6 @@ public class ParsePatients {
     // The index 0 is given in the case of repeated fields.
     System.out.println(patient.getName(0).getGiven(0).getValue() + " "
         + patient.getName(0).getFamily().getValue() + " was born on ");
-        // << PrintFhirPrimitive(example_patient.birth_date());    
+        // << PrintFhirPrimitive(example_patient.birth_date());
   }
 }
