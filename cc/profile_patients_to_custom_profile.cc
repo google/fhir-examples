@@ -21,15 +21,14 @@
 #include "absl/time/time.h"
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
-#include "proto/r4/core/resources/patient.pb.h"
 #include "proto/myprofile/myprofile.pb.h"
 #include "cc/example_utils.h"
 
 using std::string;
 
+using ::fhirexamples::myprofile::DemoPatient
 using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::PrintFhirToJsonStringForAnalytics;
-using ::google::fhir::r4::core::Patient;
 
 // Example code for generating and using custom profile sets.
 // This uses the "MyProfile" profile set defined in //proto/myprofile
@@ -45,21 +44,18 @@ using ::google::fhir::r4::core::Patient;
 // bazel-bin/cc/ProfilePatientsToCustomProfile $WORKSPACE
 
 int main(int argc, char** argv) {
-  absl::TimeZone time_zone;
-  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
-
-  const std::vector<Patient>& patients =
-  		fhir_examples::ReadNdJsonFile<Patient>(
-  			  time_zone, absl::StrCat(argv[1], "/ndjson/Patient.fhir.ndjson"));
-
-  std::vector<fhirexamples::myprofile::DemoPatient> demo_patients;
-  for (const Patient& patient : patients) {
-    demo_patients.emplace_back();
-    google::fhir::ConvertToProfileR4(patient, &demo_patients.back());
+  if (argc == 1) {
+    std::cout  << "Missing workspace argument." << std::endl;
+    return 1;
   }
+  const std::string& workspace = argv[1];
+
+  const std::vector<DemoPatient>& patients =
+  		fhir_examples::ReadNdJsonFile<DemoPatient>(
+  			  absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   const fhirexamples::myprofile::DemoPatient& example_patient =
-      demo_patients.front();
+      patients.front();
   std::cout << example_patient.DebugString() << std::endl;
 
   std::cout << "\n\n" << example_patient.name(0).given(0).value() << " "

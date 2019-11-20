@@ -39,15 +39,18 @@ using ::google::fhir::r4::uscore::USCorePatientProfile;
 //
 // To run:
 // bazel build //cc:ProfilePatientsToUsCore
-// bazel build //cc:ProfilePatientsToUsCore $WORKSPACE
+// bazel-bin/cc/ProfilePatientsToUsCore $WORKSPACE
 
 int main(int argc, char** argv) {
-  absl::TimeZone time_zone;
-  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
+  if (argc == 1) {
+    std::cout  << "Missing workspace argument." << std::endl;
+    return 1;
+  }
+  const std::string& workspace = argv[1];
 
   const std::vector<Patient>& patients =
   		fhir_examples::ReadNdJsonFile<Patient>(
-  			  time_zone, absl::StrCat(argv[1], "/ndjson/Patient.fhir.ndjson"));
+  			  absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   // Note that this is an example of how to convert a proto from one profile to
   // another.

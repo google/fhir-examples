@@ -40,12 +40,18 @@ using ::google::fhir::JsonFhirStringToProto;
 // For instructions on setting up your workspace, see the top-level README.md
 
 int main(int argc, char** argv) {
+  if (argc == 1) {
+    std::cout  << "Missing workspace argument." << std::endl;
+    return 1;
+  }
+  const std::string& workspace = argv[1];
+
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
 
   std::ifstream read_stream;
-  std::cout << "Reading " + absl::StrCat(argv[1]) << std::endl;
-  read_stream.open(absl::StrCat(argv[1], "/ndjson/Patient.fhir.ndjson"));
+  std::cout << "Reading " + absl::StrCat(workspace) << std::endl;
+  read_stream.open(absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   std::vector<Patient> result;
   std::string line;
@@ -73,6 +79,6 @@ int main(int argc, char** argv) {
 
   // Uncomment to see the first record converted back to FHIR JSON form
   // const std::string first_record_as_json =
-  //     ::google::fhir::PrettyPrintFhirJsonString().ValueOrDie();
-  // std::cout << first_record_as_json
+  //     ::google::fhir::PrettyPrintFhirToJsonString(example_patient).ValueOrDie();
+  // std::cout << first_record_as_json << std::endl;
 }

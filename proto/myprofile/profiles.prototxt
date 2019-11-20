@@ -28,4 +28,16 @@ profile {
     }
     url: "https://mycompany.com/fhir/myprofile/LikesPie"
   }
+
+  codeable_concept_slice {
+    coding_slice {
+      element_data {
+        name: "v3"
+      }
+      code_data {
+        system: "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"
+      }
+    }
+    field_id: "Patient.maritalStatus"
+  }
 }

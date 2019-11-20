@@ -44,13 +44,16 @@ using ::google::fhir::r4::uscore::USCorePatientProfile;
 // For instructions on setting up your workspace, see the top-level README.md
 
 int main(int argc, char** argv) {
-  absl::TimeZone time_zone;
-  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
+  if (argc == 1) {
+    std::cout  << "Missing workspace argument." << std::endl;
+    return 1;
+  }
+  const std::string& workspace = argv[1];
 
   // Read all the synthea patients directly into USCore Patient protos.
   std::vector<USCorePatientProfile> patients =
       fhir_examples::ReadNdJsonFile<USCorePatientProfile>(
-          time_zone, absl::StrCat(argv[1], "/ndjson/Patient.fhir.ndjson"));
+          absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   // All of the elements of patients
   // We know this is true, because if any failed to meet the requirements of
@@ -69,6 +72,11 @@ int main(int argc, char** argv) {
       patient.mutable_managing_organization()
           ->mutable_practitioner_id()
           ->set_value("1234");
+    } else if (distribution(generator) < .05) {
+      // Add a contact with just an id.
+      // This violates the FHIRPath for contact, which requires
+      // "name.exists() or telecom.exists() or address.exists() or organization.exists()"
+      patient.mutable_contact()->mutable_id()->set_value("9876");
     }
   }
 

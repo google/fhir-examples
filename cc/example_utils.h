@@ -31,10 +31,13 @@ using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::StatusOr;
 
 template <typename R>
-std::vector<R> ReadNdJsonFile(
-    const absl::TimeZone& time_zone, std::string filename) {
+std::vector<R> ReadNdJsonFile(std::string filename) {
+
   std::ifstream read_stream;
   read_stream.open(absl::StrCat(filename));
+
+  absl::TimeZone time_zone;
+  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
 
   std::vector<R> result;
   std::string line;
@@ -51,6 +54,7 @@ std::vector<R> ReadNdJsonFile(
       continue;
     }
     result.push_back(status_or_proto.ValueOrDie());
+    std::cout << "Parsed Patient " << result.back().id().value() << std::endl;
   }
   return result;
 }

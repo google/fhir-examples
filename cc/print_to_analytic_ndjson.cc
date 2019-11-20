@@ -19,7 +19,6 @@
 #include <vector>
 
 #include "absl/strings/str_cat.h"
-#include "absl/time/time.h"
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
 #include "proto/r4/core/resources/patient.pb.h"
@@ -56,20 +55,21 @@ double Rand() {
 // bazel build //java:GenerateBigQuerySchema.java $WORKSPACE
 //
 // Finally, upload the DemoPatients to BigQuery:
-// shell/upload_demo_patients.sh
+// shell/upload_resource.sh $WORKSPACE DemoPatient
 //
 // Now, you can run queries like
 // SELECT favorites, likesPie FROM `$PROJECT.fhirexamples.DemoPatient` LIMIT 10
 
 int main(int argc, char** argv) {
-  const std::string workspace = argv[1];
-
-  absl::TimeZone time_zone;
-  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
+  if (argc == 1) {
+    std::cout  << "Missing workspace argument." << std::endl;
+    return 1;
+  }
+  const std::string& workspace = argv[1];
 
   std::vector<DemoPatient> patients =
       fhir_examples::ReadNdJsonFile<DemoPatient>(
-          time_zone, absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
+          absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   std::ofstream write_stream;
   write_stream.open(
@@ -117,8 +117,8 @@ int main(int argc, char** argv) {
   }
   write_stream.close();
 
-  // Finally, let's just print out one example in FHIR JSON to see what that
-  // looks like:
-  std::cout << google::fhir::PrettyPrintFhirToJsonString(patients.front()).ValueOrDie()
-            << std::endl;
+  // Finally, uncomment to print out one example in FHIR JSON prove that even
+  // profiled protos print to valid FHIR JSON
+  // std::cout << google::fhir::PrettyPrintFhirToJsonString(patients.front()).ValueOrDie()
+  //           << std::endl;
 }
