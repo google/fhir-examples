@@ -12,7 +12,7 @@ curl https://raw.githubusercontent.com/google/fhir/v0.5.0/bazel/generate_protos_
 ```
 Now, just invoke the generate_definitions_and_protos.sh script on the `gen_fhir_definitions_and_protos` rule in the BUILD file in this directory:
 ```
-generate_definitions_and_protos.sh //proto:myprofile
+generate_definitions_and_protos.sh //proto/myprofile:myprofile
 ```
 
 You will see 3 files get generated:

@@ -87,15 +87,16 @@ int main(int argc, char** argv) {
            ->mutable_favorite_number()
            ->set_value((int) (Rand() * 100));
 
-    if (Rand() > .6) {
+    if (Rand() > .5) {
       patient.mutable_favorites()
              ->mutable_pet_names()
-             ->mutable_dog()
+             ->add_dog()
              ->set_value("Fido");
-    } else {
+    }
+    if (Rand() > .5) {
       patient.mutable_favorites()
              ->mutable_pet_names()
-             ->mutable_dog()
+             ->add_dog()
              ->set_value("Spot");
     }
 

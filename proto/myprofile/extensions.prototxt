@@ -34,6 +34,7 @@ complex_extension {
     simple_field {
       element_data {
         name: "dog"
+        size_restriction: REPEATED
       }
       type: "string"
     }

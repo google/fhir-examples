@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
       // Add a contact with just an id.
       // This violates the FHIRPath for contact, which requires
       // "name.exists() or telecom.exists() or address.exists() or organization.exists()"
-      patient.mutable_contact()->mutable_id()->set_value("9876");
+      patient.add_contact()->mutable_id()->set_value("9876");
     }
   }
 

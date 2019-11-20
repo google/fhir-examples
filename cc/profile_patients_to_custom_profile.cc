@@ -26,7 +26,7 @@
 
 using std::string;
 
-using ::fhirexamples::myprofile::DemoPatient
+using ::fhirexamples::myprofile::DemoPatient;
 using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 
