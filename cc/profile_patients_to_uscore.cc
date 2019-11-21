@@ -31,6 +31,7 @@ using std::string;
 
 using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::PrintFhirToJsonStringForAnalytics;
+using ::google::fhir::PrintFhirPrimitive;
 using ::google::fhir::r4::core::Patient;
 using ::google::fhir::r4::uscore::USCorePatientProfile;
 
@@ -60,13 +61,17 @@ int main(int argc, char** argv) {
 
   std::vector<USCorePatientProfile> uscore_patients;
   for (const Patient& patient : patients) {
-    uscore_patients.emplace_back();
+    USCorePatientProfile uscore_patient;
     google::fhir::Status status =
-        google::fhir::ConvertToProfileR4(patient, &uscore_patients.back());
+        google::fhir::ConvertToProfileR4(patient, &uscore_patient);
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()
                 << " is invalid for US Core profile: "
                 << status.error_message() << std::endl;
+    } else {
+      std::cout << "Converted Patient " << uscore_patient.id().value()
+                << std::endl;
+      uscore_patients.push_back(uscore_patient);
     }
   }
 
@@ -76,8 +81,9 @@ int main(int argc, char** argv) {
 
   std::cout << "\n\n" << example_patient.name(0).given(0).value() << " "
             << example_patient.name(0).family().value()
-            << " has race: "
-            << example_patient.race().text().value()
+            << " has gender: "
+            << PrintFhirPrimitive(example_patient.birthsex()).ValueOrDie()
+            << " and race: " << example_patient.race().text().value()
             << "\n\n";
 
 

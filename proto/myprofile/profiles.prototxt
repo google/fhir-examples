@@ -5,11 +5,6 @@ profile {
   }
   base_url: "http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient"
 
-  restriction {
-    field_id: "Patient.birthDate"
-    size_restriction: REQUIRED
-  }
-
   extension_slice {
     element_data {
       name: "birthPlace"
@@ -17,6 +12,23 @@ profile {
       size_restriction: REQUIRED
     }
     url: "http://hl7.org/fhir/StructureDefinition/patient-birthPlace"
+  }
+
+  codeable_concept_slice {
+    field_id: "Patient.maritalStatus"
+    coding_slice {
+      element_data {
+        name: "v3"
+      }
+      code_data {
+        system: "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"
+      }
+    }
+  }
+
+  restriction {
+    field_id: "Patient.birthDate"
+    size_restriction: REQUIRED
   }
 
   extension_slice {
@@ -35,15 +47,5 @@ profile {
     url: "https://mycompany.com/fhir/myprofile/LikesPie"
   }
 
-  codeable_concept_slice {
-    coding_slice {
-      element_data {
-        name: "v3"
-      }
-      code_data {
-        system: "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"
-      }
-    }
-    field_id: "Patient.maritalStatus"
-  }
+
 }

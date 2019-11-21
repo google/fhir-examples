@@ -84,7 +84,8 @@ int main(int argc, char** argv) {
     google::fhir::Status status = google::fhir::ValidateResource(patient);
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()
-                << " is invalid: " << status.error_message() << std::endl;
+                << " is invalid: " << status.error_message() << "\n\n"
+                << std::endl;
     }
   }
 }

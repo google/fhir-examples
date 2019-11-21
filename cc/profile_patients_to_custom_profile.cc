@@ -28,6 +28,7 @@ using std::string;
 
 using ::fhirexamples::myprofile::DemoPatient;
 using ::google::fhir::JsonFhirStringToProto;
+using ::google::fhir::PrintFhirPrimitive;
 using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 
 // Example code for generating and using custom profile sets.
@@ -63,5 +64,8 @@ int main(int argc, char** argv) {
             << " has race: "
             << example_patient.race().text().value()
             << " and lives in " << example_patient.birth_place().city().value()
-            << ", " << example_patient.birth_place().state().value() << ".\n\n";
+            << ", " << example_patient.birth_place().state().value()
+            << " and has marital status: "
+            << example_patient.marital_status().v3().display().value()
+            << "\n\n" << std::endl;
 }

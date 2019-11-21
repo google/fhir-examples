@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
             << example_patient.name(0).family().value()
             << " was born on "
             << PrintFhirPrimitive(example_patient.birth_date()).ValueOrDie()
-            << std::endl;
+            << "\n\n" << std::endl;
 
 
   // Uncomment to see the first record converted back to FHIR JSON form
