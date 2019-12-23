@@ -2,7 +2,7 @@
 # Usage Examples for FhirProto
 This repository contains examples of how to use the __FhirProto__ platform at [github.com/google/fhir](github.com/google/fhir). This repo contains a `generate-synthea.sh` script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying. Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
 
-The rest of this README contains instructions for setting up an environment for working with __FhirProto__.  For instructions on running the examples, check out [EXAMPLES.md](github.com/google/fhir-examples/blob/master/EXAMPLES.md).
+The rest of this README contains instructions for setting up an environment for working with __FhirProto__.  For instructions on running the examples, check out [EXAMPLES.md](EXAMPLES.md).
 
 For a more comprehensive explanation of the platform, see the [**User Guide**](https://github.com/google/fhir/blob/master/USERGUIDE.md) at the main repo
 ## Setting Up Bazel
