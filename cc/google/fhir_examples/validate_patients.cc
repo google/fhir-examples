@@ -12,26 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <random>
 #include <stdlib.h>
 
-#include "absl/strings/str_cat.h"
-#include "absl/time/time.h"
-#include "google/fhir/json_format.h"
+#include <fstream>
+#include <iostream>
+#include <random>
+#include <string>
+#include <vector>
+
+#include "google/fhir/r4/json_format.h"
+#include "google/fhir/r4/resource_validation.h"
 #include "google/fhir/status/status.h"
-#include "google/fhir/resource_validation.h"
 #include "proto/r4/core/resources/patient.pb.h"
 #include "proto/r4/uscore.pb.h"
-#include "cc/example_utils.h"
+#include "google/fhir_examples/example_utils.h"
 
 using std::string;
 
+using ::google::fhir::r4::JsonFhirStringToProto;
 using ::google::fhir::r4::core::Patient;
-using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::r4::uscore::USCorePatientProfile;
 
 // Example code for running resource validation
@@ -45,10 +44,10 @@ using ::google::fhir::r4::uscore::USCorePatientProfile;
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::cout  << "Missing workspace argument." << std::endl;
+    std::cout << "Missing workspace argument." << std::endl;
     return 1;
   }
-  const std::string& workspace = argv[1];
+  const std::string workspace = argv[1];
 
   // Read all the synthea patients directly into USCore Patient protos.
   std::vector<USCorePatientProfile> patients =
@@ -75,16 +74,17 @@ int main(int argc, char** argv) {
     } else if (distribution(generator) < .05) {
       // Add a contact with just an id.
       // This violates the FHIRPath for contact, which requires
-      // "name.exists() or telecom.exists() or address.exists() or organization.exists()"
+      // "name.exists() or telecom.exists() or address.exists() or
+      // organization.exists()"
       patient.add_contact()->mutable_id()->set_value("9876");
     }
   }
 
   for (USCorePatientProfile& patient : patients) {
-    google::fhir::Status status = google::fhir::ValidateResource(patient);
+    google::fhir::Status status = google::fhir::r4::ValidateResource(patient);
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()
-                << " is invalid: " << status.error_message() << "\n\n"
+                << " is invalid: " << status.message() << "\n\n"
                 << std::endl;
     }
   }

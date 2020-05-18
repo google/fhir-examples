@@ -36,7 +36,7 @@ profile {
       name: "favorites"
       description: "Info about the patient's favorites"
     }
-    url: "https://mycompany.com/fhir/myprofile/Favorites"
+    url: "https://mycompany.com/fhir/myprofile/StructureDefinition/Favorites"
   }
 
   extension_slice {
@@ -44,7 +44,7 @@ profile {
       name: "likesPie"
       description: "Whether or not the patient likes pie."
     }
-    url: "https://mycompany.com/fhir/myprofile/LikesPie"
+    url: "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie"
   }
 
 

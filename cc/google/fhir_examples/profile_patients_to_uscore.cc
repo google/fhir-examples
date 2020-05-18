@@ -17,21 +17,17 @@
 #include <string>
 #include <vector>
 
-#include "absl/strings/str_cat.h"
-#include "absl/time/time.h"
-#include "google/fhir/json_format.h"
+#include "google/fhir/r4/json_format.h"
 #include "google/fhir/r4/profiles.h"
+#include "google/fhir/r4/resource_validation.h"
 #include "google/fhir/status/status.h"
-#include "google/fhir/resource_validation.h"
 #include "proto/r4/core/resources/patient.pb.h"
 #include "proto/r4/uscore.pb.h"
-#include "cc/example_utils.h"
+#include "google/fhir_examples/example_utils.h"
 
 using std::string;
 
-using ::google::fhir::JsonFhirStringToProto;
-using ::google::fhir::PrintFhirToJsonStringForAnalytics;
-using ::google::fhir::PrintFhirPrimitive;
+using ::google::fhir::r4::PrintFhirPrimitive;
 using ::google::fhir::r4::core::Patient;
 using ::google::fhir::r4::uscore::USCorePatientProfile;
 
@@ -44,14 +40,13 @@ using ::google::fhir::r4::uscore::USCorePatientProfile;
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::cout  << "Missing workspace argument." << std::endl;
+    std::cout << "Missing workspace argument." << std::endl;
     return 1;
   }
-  const std::string& workspace = argv[1];
+  const std::string workspace = argv[1];
 
-  const std::vector<Patient>& patients =
-  		fhir_examples::ReadNdJsonFile<Patient>(
-  			  absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
+  const std::vector<Patient> patients = fhir_examples::ReadNdJsonFile<Patient>(
+      absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   // Note that this is an example of how to convert a proto from one profile to
   // another.
@@ -66,8 +61,8 @@ int main(int argc, char** argv) {
         google::fhir::ConvertToProfileR4(patient, &uscore_patient);
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()
-                << " is invalid for US Core profile: "
-                << status.error_message() << std::endl;
+                << " is invalid for US Core profile: " << status.message()
+                << std::endl;
     } else {
       std::cout << "Converted Patient " << uscore_patient.id().value()
                 << std::endl;
@@ -79,12 +74,9 @@ int main(int argc, char** argv) {
 
   std::cout << example_patient.DebugString() << std::endl;
 
-  std::cout << "\n\n" << example_patient.name(0).given(0).value() << " "
-            << example_patient.name(0).family().value()
-            << " has gender: "
+  std::cout << "\n\n"
+            << example_patient.name(0).given(0).value() << " "
+            << example_patient.name(0).family().value() << " has gender: "
             << PrintFhirPrimitive(example_patient.birthsex()).ValueOrDie()
-            << " and race: " << example_patient.race().text().value()
-            << "\n\n";
-
-
+            << " and race: " << example_patient.race().text().value() << "\n\n";
 }

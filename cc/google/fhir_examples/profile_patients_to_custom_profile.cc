@@ -17,19 +17,16 @@
 #include <string>
 #include <vector>
 
-#include "absl/strings/str_cat.h"
-#include "absl/time/time.h"
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
-#include "proto/myprofile/myprofile.pb.h"
-#include "cc/example_utils.h"
+#include "proto/r4/core/datatypes.pb.h"
+#include "proto/r4/uscore.pb.h"
+#include "google/fhir_examples/example_utils.h"
+#include "proto/google/fhir_examples//myprofile/myprofile.pb.h"
 
 using std::string;
 
 using ::fhirexamples::myprofile::DemoPatient;
-using ::google::fhir::JsonFhirStringToProto;
-using ::google::fhir::PrintFhirPrimitive;
-using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 
 // Example code for generating and using custom profile sets.
 // This uses the "MyProfile" profile set defined in //proto/myprofile
@@ -46,26 +43,26 @@ using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::cout  << "Missing workspace argument." << std::endl;
+    std::cout << "Missing workspace argument." << std::endl;
     return 1;
   }
-  const std::string& workspace = argv[1];
+  const std::string workspace = argv[1];
 
-  const std::vector<DemoPatient>& patients =
-  		fhir_examples::ReadNdJsonFile<DemoPatient>(
-  			  absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
+  const std::vector<DemoPatient> patients =
+      fhir_examples::ReadNdJsonFile<DemoPatient>(
+          absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
 
   const fhirexamples::myprofile::DemoPatient& example_patient =
       patients.front();
   std::cout << example_patient.DebugString() << std::endl;
 
-  std::cout << "\n\n" << example_patient.name(0).given(0).value() << " "
+  std::cout << "\n\n"
+            << example_patient.name(0).given(0).value() << " "
             << example_patient.name(0).family().value()
-            << " has race: "
-            << example_patient.race().text().value()
+            << " has race: " << example_patient.race().text().value()
             << " and lives in " << example_patient.birth_place().city().value()
             << ", " << example_patient.birth_place().state().value()
             << " and has marital status: "
-            << example_patient.marital_status().v3().display().value()
-            << "\n\n" << std::endl;
+            << example_patient.marital_status().v3().display().value() << "\n\n"
+            << std::endl;
 }

@@ -16,12 +16,9 @@
 
 package com.google.fhirexamples;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-import com.google.common.io.Files;
+import com.google.fhir.common.JsonFormat;
 import com.google.fhir.common.JsonFormat.Parser;
 import com.google.fhir.r4.core.Patient;
-import com.google.protobuf.Message;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -30,22 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Example code for using JsonFormat to move back and forth from
- * FHIR JSON <--> FHIR Proto
+ * Example code for using JsonFormat to move back and forth from FHIR JSON <--> FHIR Proto
  *
- * To run:
- * bazel build //java:ParsePatients
- * bazel-bin/java/ParsePatients $WORKSPACE
+ * <p>To run: bazel build //java:ParsePatients bazel-bin/java/ParsePatients $WORKSPACE
  *
- * where $WORKSPACE is the location of a synthea dataset.
- * For instructions on setting up your workspace, see the top-level README.md
+ * <p>where $WORKSPACE is the location of a synthea dataset. For instructions on setting up your
+ * workspace, see the top-level README.md
  */
 public class ParsePatients {
 
   public static void main(String[] argv) throws IOException {
-    Parser fhirParser = Parser.newBuilder()
-        .withDefaultTimeZone(ZoneId.of("America/Los_Angeles"))
-        .build();
+    Parser fhirParser =
+        JsonFormat.getParser().withDefaultTimeZone(ZoneId.of("America/Los_Angeles"));
 
     String filename = argv[0] + "/ndjson/Patient.fhir.ndjson";
     System.out.println("Reading " + filename);
@@ -67,8 +60,11 @@ public class ParsePatients {
 
     // Print the patient's name and birthdate.
     // The index 0 is given in the case of repeated fields.
-    System.out.println(patient.getName(0).getGiven(0).getValue() + " "
-        + patient.getName(0).getFamily().getValue() + " was born on ");
-        // << PrintFhirPrimitive(example_patient.birth_date());
+    System.out.println(
+        patient.getName(0).getGiven(0).getValue()
+            + " "
+            + patient.getName(0).getFamily().getValue()
+            + " was born at "
+            + patient.getBirthDate().getValueUs());
   }
 }

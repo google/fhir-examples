@@ -17,17 +17,15 @@
 #include <string>
 #include <vector>
 
-#include "absl/strings/str_cat.h"
-#include "absl/time/time.h"
-#include "google/fhir/json_format.h"
+#include "google/fhir/r4/json_format.h"
 #include "proto/r4/core/resources/patient.pb.h"
-#include "cc/example_utils.h"
+#include "google/fhir_examples/example_utils.h"
 
 using std::string;
 
+using ::google::fhir::r4::JsonFhirStringToProto;
+using ::google::fhir::r4::PrintFhirPrimitive;
 using ::google::fhir::r4::core::Patient;
-using ::google::fhir::PrintFhirPrimitive;
-using ::google::fhir::JsonFhirStringToProto;
 
 // Example code for using JsonFormat to move back and forth from
 // FHIR JSON <--> FHIR Proto
@@ -41,10 +39,10 @@ using ::google::fhir::JsonFhirStringToProto;
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::cout  << "Missing workspace argument." << std::endl;
+    std::cout << "Missing workspace argument." << std::endl;
     return 1;
   }
-  const std::string& workspace = argv[1];
+  const std::string workspace = argv[1];
 
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
@@ -59,7 +57,7 @@ int main(int argc, char** argv) {
     std::getline(read_stream, line);
     if (!line.length()) continue;
     result.push_back(
-      JsonFhirStringToProto<Patient>(line, time_zone).ValueOrDie());
+        JsonFhirStringToProto<Patient>(line, time_zone).ValueOrDie());
     std::cout << "Parsed Patient " << result.back().id().value() << std::endl;
   }
 
@@ -71,11 +69,10 @@ int main(int argc, char** argv) {
   // Print the patient's name and birthdate.
   // The index 0 is given in the case of repeated fields.
   std::cout << example_patient.name(0).given(0).value() << " "
-            << example_patient.name(0).family().value()
-            << " was born on "
+            << example_patient.name(0).family().value() << " was born on "
             << PrintFhirPrimitive(example_patient.birth_date()).ValueOrDie()
-            << "\n\n" << std::endl;
-
+            << "\n\n"
+            << std::endl;
 
   // Uncomment to see the first record converted back to FHIR JSON form
   // const std::string first_record_as_json =
