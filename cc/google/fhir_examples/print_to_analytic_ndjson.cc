@@ -22,7 +22,7 @@
 #include "google/fhir/r4/profiles.h"
 #include "proto/r4/core/resources/patient.pb.h"
 #include "google/fhir_examples/example_utils.h"
-#include "proto/google/fhir_examples//myprofile/myprofile.pb.h"
+#include "proto/google/fhir_examples/myprofile/myprofile.pb.h"
 
 using std::string;
 
