@@ -1,11 +1,11 @@
+load("@com_google_fhir//bazel:protogen.bzl", "gen_fhir_definitions_and_protos")
+load("@com_google_fhir//bazel:proto.bzl", "fhir_proto_library")
+
 package(
     default_visibility = ["//visibility:public"],
 )
 
 licenses(["notice"])
-
-load("@com_google_fhir//bazel:protogen.bzl", "gen_fhir_definitions_and_protos")
-load("@com_google_fhir//bazel:proto.bzl", "fhir_proto_library")
 
 gen_fhir_definitions_and_protos(
     name = "myprofile",
@@ -14,7 +14,7 @@ gen_fhir_definitions_and_protos(
         "proto/r4/uscore_codes.proto",
     ],
     extensions = [
-        "extensions.prototxt"
+        "extensions.prototxt",
     ],
     package_deps = [
         "@com_google_fhir//spec:uscore_r4_package",

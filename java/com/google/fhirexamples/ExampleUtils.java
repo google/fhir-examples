@@ -16,9 +16,7 @@
 
 package com.google.fhirexamples;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-import com.google.common.io.Files;
+import com.google.fhir.common.JsonFormat;
 import com.google.fhir.common.JsonFormat.Parser;
 import com.google.protobuf.Message;
 import java.io.BufferedReader;
@@ -28,14 +26,11 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ExampleUtils {
 
-  public static <R extends Message> List<R> loadNdJson(R type, String filename) 
-      throws IOException {
-    Parser fhirParser = Parser.newBuilder()
-        .withDefaultTimeZone(ZoneId.of("America/Los_Angeles"))
-        .build();
+  public static <R extends Message> List<R> loadNdJson(R type, String filename) throws IOException {
+    Parser fhirParser =
+        JsonFormat.getParser().withDefaultTimeZone(ZoneId.of("America/Los_Angeles"));
 
     System.out.println("Reading " + filename);
     BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -45,7 +40,7 @@ public class ExampleUtils {
     while ((line = reader.readLine()) != null) {
       Message.Builder typeBuilder = type.newBuilderForType();
       fhirParser.merge(line, typeBuilder);
-      result.add((R)typeBuilder.build());
+      result.add((R) typeBuilder.build());
     }
     return result;
   }

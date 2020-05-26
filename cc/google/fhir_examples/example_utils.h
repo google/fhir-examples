@@ -21,18 +21,17 @@
 
 #include "absl/strings/str_cat.h"
 #include "absl/time/time.h"
-#include "google/fhir/json_format.h"
+#include "google/fhir/r4/json_format.h"
 #include "google/fhir/status/statusor.h"
 #include "proto/r4/core/resources/patient.pb.h"
 
 namespace fhir_examples {
 
-using ::google::fhir::JsonFhirStringToProto;
 using ::google::fhir::StatusOr;
+using ::google::fhir::r4::JsonFhirStringToProto;
 
 template <typename R>
 std::vector<R> ReadNdJsonFile(std::string filename) {
-
   std::ifstream read_stream;
   read_stream.open(absl::StrCat(filename));
 
@@ -48,9 +47,8 @@ std::vector<R> ReadNdJsonFile(std::string filename) {
     StatusOr<R> status_or_proto = JsonFhirStringToProto<R>(line, time_zone);
     if (!status_or_proto.ok()) {
       std::cout << "Failed to parse a record to "
-                << R::descriptor()->full_name()
-                << ": " << status_or_proto.status().error_message()
-                << std::endl;
+                << R::descriptor()->full_name() << ": "
+                << status_or_proto.status().message() << std::endl;
       continue;
     }
     result.push_back(status_or_proto.ValueOrDie());

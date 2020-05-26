@@ -18,17 +18,16 @@
 #include <string>
 #include <vector>
 
-#include "absl/strings/str_cat.h"
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
 #include "proto/r4/core/resources/patient.pb.h"
-#include "proto/myprofile/myprofile.pb.h"
-#include "cc/example_utils.h"
+#include "google/fhir_examples/example_utils.h"
+#include "proto/google/fhir_examples/myprofile/myprofile.pb.h"
 
 using std::string;
 
-using ::google::fhir::PrintFhirToJsonStringForAnalytics;
 using ::fhirexamples::myprofile::DemoPatient;
+using ::google::fhir::r4::PrintFhirToJsonStringForAnalytics;
 
 double Rand() {
   static std::default_random_engine generator;
@@ -62,10 +61,10 @@ double Rand() {
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::cout  << "Missing workspace argument." << std::endl;
+    std::cout << "Missing workspace argument." << std::endl;
     return 1;
   }
-  const std::string& workspace = argv[1];
+  const std::string workspace = argv[1];
 
   std::vector<DemoPatient> patients =
       fhir_examples::ReadNdJsonFile<DemoPatient>(
@@ -75,7 +74,6 @@ int main(int argc, char** argv) {
   write_stream.open(
       absl::StrCat(workspace, "/analytic/DemoPatient.analytic.ndjson"));
 
-
   for (DemoPatient& patient : patients) {
     if (Rand() > .15) {
       patient.mutable_likes_pie()->set_value(true);
@@ -83,43 +81,38 @@ int main(int argc, char** argv) {
       patient.mutable_likes_pie()->set_value(false);
     }
 
-    patient.mutable_favorites()
-           ->mutable_favorite_number()
-           ->set_value((int) (Rand() * 100));
+    patient.mutable_favorites()->mutable_favorite_number()->set_value(
+        static_cast<int>(Rand() * 100));
 
     if (Rand() > .5) {
-      patient.mutable_favorites()
-             ->mutable_pet_names()
-             ->add_dog()
-             ->set_value("Fido");
+      patient.mutable_favorites()->mutable_pet_names()->add_dog()->set_value(
+          "Fido");
     }
     if (Rand() > .5) {
-      patient.mutable_favorites()
-             ->mutable_pet_names()
-             ->add_dog()
-             ->set_value("Spot");
+      patient.mutable_favorites()->mutable_pet_names()->add_dog()->set_value(
+          "Spot");
     }
 
     if (Rand() > .6) {
       patient.mutable_favorites()
-             ->mutable_pet_names()
-             ->mutable_cat()
-             ->set_value("Pippen");
+          ->mutable_pet_names()
+          ->mutable_cat()
+          ->set_value("Pippen");
     } else {
       patient.mutable_favorites()
-             ->mutable_pet_names()
-             ->mutable_cat()
-             ->set_value("Ivan");
+          ->mutable_pet_names()
+          ->mutable_cat()
+          ->set_value("Ivan");
     }
 
-    write_stream <<
-        PrintFhirToJsonStringForAnalytics(patient).ValueOrDie();
+    write_stream << PrintFhirToJsonStringForAnalytics(patient).ValueOrDie();
     write_stream << "\n";
   }
   write_stream.close();
 
   // Finally, uncomment to print out one example in FHIR JSON prove that even
   // profiled protos print to valid FHIR JSON
-  // std::cout << google::fhir::PrettyPrintFhirToJsonString(patients.front()).ValueOrDie()
+  // std::cout <<
+  // google::fhir::PrettyPrintFhirToJsonString(patients.front()).ValueOrDie()
   //           << std::endl;
 }

@@ -14,21 +14,21 @@
 
 package com.google.fhirexamples;
 
-import com.mycompany.fhirexamples.myprofile.DemoPatient;
+import static com.google.common.io.Files.asCharSink;
+
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.bigquery.model.TableSchema;
 import com.google.fhir.common.BigQuerySchema;
 import com.google.protobuf.Descriptors.Descriptor;
+import com.mycompany.fhirexamples.myprofile.DemoPatient;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Utility for generating BigQuery schema from descriptors.
- * Generated schema will be located in $WORKSPACE/analytic/[Resource].schema,json
+ * Utility for generating BigQuery schema from descriptors. Generated schema will be located in
+ * $WORKSPACE/analytic/[Resource].schema,json
  */
 public class GenerateBigQuerySchema {
 
@@ -43,9 +43,8 @@ public class GenerateBigQuerySchema {
       TableSchema schema = BigQuerySchema.fromDescriptor(descriptor);
 
       GsonFactory gsonFactory = new GsonFactory();
-      com.google.common.io.Files.asCharSink(
-          new File(filename), StandardCharsets.UTF_8)
-              .write(gsonFactory.toPrettyString(schema.getFields()));
+      asCharSink(new File(filename), StandardCharsets.UTF_8)
+          .write(gsonFactory.toPrettyString(schema.getFields()));
     }
   }
 }

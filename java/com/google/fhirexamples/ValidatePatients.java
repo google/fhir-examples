@@ -16,24 +16,20 @@
 
 package com.google.fhirexamples;
 
-import com.google.fhir.r4.core.Patient;
-import com.google.fhir.r4.core.Reference;
 import com.google.fhir.common.InvalidFhirException;
 import com.google.fhir.common.ResourceValidator;
+import com.google.fhir.r4.core.Patient;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Example code for using JsonFormat to move back and forth from
- * FHIR JSON <--> FHIR Proto
+ * Example code for using JsonFormat to move back and forth from FHIR JSON <--> FHIR Proto
  *
- * To run:
- * bazel build //java:ValidatePatients
- * bazel-bin/java/ValidatePatients $WORKSPACE
+ * <p>To run: bazel build //java:ValidatePatients bazel-bin/java/ValidatePatients $WORKSPACE
  *
- * where $WORKSPACE is the location of a synthea dataset.
- * For instructions on setting up your workspace, see the top-level README.md
+ * <p>where $WORKSPACE is the location of a synthea dataset. For instructions on setting up your
+ * workspace, see the top-level README.md
  */
 public class ValidatePatients {
 
@@ -47,9 +43,10 @@ public class ValidatePatients {
     for (Patient patient : patients) {
       if (Math.random() < .05) {
         Patient.Builder modifiedPatient = patient.toBuilder();
-        modifiedPatient.getManagingOrganizationBuilder()
-                .getPractitionerIdBuilder()
-                .setValue("1234");
+        modifiedPatient
+            .getManagingOrganizationBuilder()
+            .getPractitionerIdBuilder()
+            .setValue("1234");
         modifiedPatients.add(modifiedPatient.build());
       } else {
         modifiedPatients.add(patient);
@@ -61,8 +58,11 @@ public class ValidatePatients {
       try {
         validator.validateResource(patient);
       } catch (InvalidFhirException e) {
-        System.out.println("Patient " + patient.getIdentifier(0).getValue().getValue()
-            + " is invalid: " + e.getMessage());
+        System.out.println(
+            "Patient "
+                + patient.getIdentifier(0).getValue().getValue()
+                + " is invalid: "
+                + e.getMessage());
       }
     }
   }
