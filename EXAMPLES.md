@@ -88,7 +88,7 @@ In this example, [profile_patients_to_custom_profile.cc](https://github.com/goog
 * [`extensions.prototxt`](https://github.com/google/fhir-examples/blob/master/proto/myprofile/extensions.prototxt) is a [Extensions](https://github.com/google/fhir/blob/master/proto/profile_config.proto#L80) proto that defines two new extensions: one simple and one complex.
 * [`profiles.prototxt`](https://github.com/google/fhir-examples/blob/master/proto/myprofile/profiles.prototxt)is a [Profiles](https://github.com/google/fhir/blob/master/proto/profile_config.proto#L76) proto that defines a profile for DemoPatient.  This extends from USCore patient, adds several new extension fields, and a slice onto the `CodeableConcept` at `Patient.maritalStatus`.
 
-In the `BUILD`file in that directory, there is a `gen_fhir_definitions_and_protos` named `myprofile`.  This will be the target of our generation script.  To generate the JSON Structure Defintions and FhirProtos, run:
+In the `BUILD`file in that directory, there is a `gen_fhir_definitions_and_protos` named `myprofile`.  This will be the target of our generation script.  To generate the JSON Structure Definitions and FhirProtos, run:
 ```
 generate_protos_from_config.sh //proto/myprofile:myprofile
 ```

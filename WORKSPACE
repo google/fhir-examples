@@ -2,19 +2,13 @@ workspace(name = "com_nickjpgeorge_fhirprotoexamples")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# DO NOT SUBMIT: remove local_repository once cr/312163265 is submitted
-# http_archive(
-#     name = "com_google_fhir",
-#     sha256 = "1dbe977b7ea225be24f5b61d03b1f0ad067c7821434f93e868f4cbde075c6c36",
-#     strip_prefix = "fhir-d2de420d5f6f0f72e06603308262998bd7c027bd",
-#     urls = [
-#         "https://github.com/google/fhir/archive/d2de420d5f6f0f72e06603308262998bd7c027bd.zip",
-#     ],
-# )
-
-local_repository(
+http_archive(
     name = "com_google_fhir",
-    path = "/tmp/fhir/",
+    sha256 = "c331326f9151954bed3be5a9537497046701fc079f744ca95f01990b6e63df20",
+    strip_prefix = "fhir-c6eecb56f90e04d0565f99053d0ba85b8e91ac71",
+    urls = [
+        "https://github.com/google/fhir/archive/c6eecb56f90e04d0565f99053d0ba85b8e91ac71.zip",
+    ],
 )
 
 load("@com_google_fhir//bazel:dependencies.bzl", "fhirproto_dependencies")
