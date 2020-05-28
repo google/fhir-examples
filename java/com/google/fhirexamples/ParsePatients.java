@@ -16,12 +16,14 @@
 
 package com.google.fhirexamples;
 
-import com.google.fhir.common.JsonFormat;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.fhir.common.JsonFormat.Parser;
 import com.google.fhir.r4.core.Patient;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +39,11 @@ import java.util.List;
 public class ParsePatients {
 
   public static void main(String[] argv) throws IOException {
-    Parser fhirParser =
-        JsonFormat.getParser().withDefaultTimeZone(ZoneId.of("America/Los_Angeles"));
+    Parser fhirParser = Parser.withDefaultTimeZone(ZoneId.of("America/Los_Angeles"));
 
     String filename = argv[0] + "/ndjson/Patient.fhir.ndjson";
     System.out.println("Reading " + filename);
-    BufferedReader reader = new BufferedReader(new FileReader(filename));
+    BufferedReader reader = Files.newBufferedReader(Paths.get(filename), UTF_8);
 
     List<Patient> result = new ArrayList<>();
     String line;
@@ -67,4 +68,6 @@ public class ParsePatients {
             + " was born at "
             + patient.getBirthDate().getValueUs());
   }
+
+  private ParsePatients() {}
 }

@@ -29,8 +29,6 @@
 
 using std::string;
 
-using ::google::fhir::r4::JsonFhirStringToProto;
-using ::google::fhir::r4::core::Patient;
 using ::google::fhir::r4::uscore::USCorePatientProfile;
 
 // Example code for running resource validation
