@@ -90,7 +90,7 @@ In this example, [profile_patients_to_custom_profile.cc](https://github.com/goog
 
 In the `BUILD`file in that directory, there is a `gen_fhir_definitions_and_protos` named `myprofile`.  This will be the target of our generation script.  To generate the JSON Structure Definitions and FhirProtos, run:
 ```
-generate_protos_from_config.sh //proto/myprofile:myprofile
+bazel/generate_definitions_and_protos.sh //proto/myprofile:myprofile
 ```
 This will generate 3 files:
 * `myprofile.json` containing the StructureDefinitions for new profile.  In our case this is just DemoPatient.
