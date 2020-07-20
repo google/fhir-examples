@@ -31,7 +31,7 @@ import (
 	"log"
 	"os"
 
-	"google/fhir/jsonformat/jsonformat"
+	"github.com/google/fhir/go/jsonformat"
 
 	r4pb "google/fhir/proto/r4/core/resources/bundle_and_contained_resource_go_proto"
 )
