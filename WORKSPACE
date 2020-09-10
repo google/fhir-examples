@@ -16,8 +16,5 @@ fhirproto_dependencies()
 load("@com_google_fhir//bazel:workspace.bzl", "fhirproto_workspace")
 fhirproto_workspace()
 
-load("@fhir_bazel_pip_dependencies//:requirements.bzl", "pip_install")
-pip_install()
-
 load("@com_google_fhir//bazel:go_dependencies.bzl", "fhir_go_dependencies")
 fhir_go_dependencies()
