@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
   std::vector<USCorePatientProfile> uscore_patients;
   for (const Patient& patient : patients) {
     USCorePatientProfile uscore_patient;
-    google::fhir::Status status =
+    absl::Status status =
         google::fhir::ConvertToProfileR4(patient, &uscore_patient);
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()
