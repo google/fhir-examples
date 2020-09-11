@@ -27,7 +27,6 @@
 
 namespace fhir_examples {
 
-using ::google::fhir::StatusOr;
 using ::google::fhir::r4::JsonFhirStringToProto;
 
 template <typename R>
@@ -44,14 +43,15 @@ std::vector<R> ReadNdJsonFile(std::string filename) {
     std::getline(read_stream, line);
     if (!line.length()) continue;
 
-    StatusOr<R> status_or_proto = JsonFhirStringToProto<R>(line, time_zone);
+    absl::StatusOr<R> status_or_proto =
+        JsonFhirStringToProto<R>(line, time_zone);
     if (!status_or_proto.ok()) {
       std::cout << "Failed to parse a record to "
                 << R::descriptor()->full_name() << ": "
                 << status_or_proto.status().message() << std::endl;
       continue;
     }
-    result.push_back(status_or_proto.ValueOrDie());
+    result.push_back(status_or_proto.value());
     std::cout << "Parsed Patient " << result.back().id().value() << std::endl;
   }
   return result;

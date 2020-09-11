@@ -56,8 +56,7 @@ int main(int argc, char** argv) {
   while (!read_stream.eof()) {
     std::getline(read_stream, line);
     if (!line.length()) continue;
-    result.push_back(
-        JsonFhirStringToProto<Patient>(line, time_zone).ValueOrDie());
+    result.push_back(JsonFhirStringToProto<Patient>(line, time_zone).value());
     std::cout << "Parsed Patient " << result.back().id().value() << std::endl;
   }
 
@@ -70,12 +69,12 @@ int main(int argc, char** argv) {
   // The index 0 is given in the case of repeated fields.
   std::cout << example_patient.name(0).given(0).value() << " "
             << example_patient.name(0).family().value() << " was born on "
-            << PrintFhirPrimitive(example_patient.birth_date()).ValueOrDie()
+            << PrintFhirPrimitive(example_patient.birth_date()).value()
             << "\n\n"
             << std::endl;
 
   // Uncomment to see the first record converted back to FHIR JSON form
   // const std::string first_record_as_json =
-  //     ::google::fhir::PrettyPrintFhirToJsonString(example_patient).ValueOrDie();
+  //     ::google::fhir::PrettyPrintFhirToJsonString(example_patient).value();
   // std::cout << first_record_as_json << std::endl;
 }

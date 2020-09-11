@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
           ->set_value("Ivan");
     }
 
-    write_stream << PrintFhirToJsonStringForAnalytics(patient).ValueOrDie();
+    write_stream << PrintFhirToJsonStringForAnalytics(patient).value();
     write_stream << "\n";
   }
   write_stream.close();
@@ -113,6 +113,6 @@ int main(int argc, char** argv) {
   // Finally, uncomment to print out one example in FHIR JSON prove that even
   // profiled protos print to valid FHIR JSON
   // std::cout <<
-  // google::fhir::PrettyPrintFhirToJsonString(patients.front()).ValueOrDie()
+  // google::fhir::PrettyPrintFhirToJsonString(patients.front()).value()
   //           << std::endl;
 }

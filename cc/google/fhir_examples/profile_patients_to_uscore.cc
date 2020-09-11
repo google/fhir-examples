@@ -77,6 +77,6 @@ int main(int argc, char** argv) {
   std::cout << "\n\n"
             << example_patient.name(0).given(0).value() << " "
             << example_patient.name(0).family().value() << " has gender: "
-            << PrintFhirPrimitive(example_patient.birthsex()).ValueOrDie()
+            << PrintFhirPrimitive(example_patient.birthsex()).value()
             << " and race: " << example_patient.race().text().value() << "\n\n";
 }
