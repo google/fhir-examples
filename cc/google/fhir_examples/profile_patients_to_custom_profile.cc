@@ -19,8 +19,8 @@
 
 #include "google/fhir/json_format.h"
 #include "google/fhir/r4/profiles.h"
-#include "proto/r4/core/datatypes.pb.h"
-#include "proto/r4/uscore.pb.h"
+#include "proto/google/fhir/proto/r4/core/datatypes.pb.h"
+#include "proto/google/fhir/proto/r4/uscore.pb.h"
 #include "google/fhir_examples/example_utils.h"
 #include "proto/google/fhir_examples/myprofile/myprofile.pb.h"
 

@@ -23,7 +23,7 @@
 #include "absl/time/time.h"
 #include "google/fhir/r4/json_format.h"
 #include "google/fhir/status/statusor.h"
-#include "proto/r4/core/resources/patient.pb.h"
+#include "proto/google/fhir/proto/r4/core/resources/patient.pb.h"
 
 namespace fhir_examples {
 

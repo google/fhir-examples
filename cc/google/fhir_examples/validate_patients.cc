@@ -23,8 +23,8 @@
 #include "google/fhir/r4/json_format.h"
 #include "google/fhir/r4/resource_validation.h"
 #include "google/fhir/status/status.h"
-#include "proto/r4/core/resources/patient.pb.h"
-#include "proto/r4/uscore.pb.h"
+#include "proto/google/fhir/proto/r4/core/resources/patient.pb.h"
+#include "proto/google/fhir/proto/r4/uscore.pb.h"
 #include "google/fhir_examples/example_utils.h"
 
 using std::string;

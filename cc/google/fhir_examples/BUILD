@@ -13,7 +13,7 @@ cc_library(
         "@com_google_absl//absl/time",
         "@com_google_fhir//cc/google/fhir/r4:json_format",
         "@com_google_fhir//cc/google/fhir/status:statusor",
-        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_cc_proto",
     ],
 )
 
@@ -23,7 +23,7 @@ cc_binary(
     deps = [
         ":example_utils",
         "@com_google_fhir//cc/google/fhir/r4:json_format",
-        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_cc_proto",
     ],
 )
 
@@ -36,8 +36,8 @@ cc_binary(
         "@com_google_fhir//cc/google/fhir/r4:profiles",
         "@com_google_fhir//cc/google/fhir/r4:resource_validation",
         "@com_google_fhir//cc/google/fhir/status",
-        "@com_google_fhir//proto/r4:uscore_cc_proto",
-        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4:uscore_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_cc_proto",
     ],
 )
 
@@ -49,8 +49,8 @@ cc_binary(
         "//proto/google/fhir_examples/myprofile:myprofile_cc_proto",
         "@com_google_fhir//cc/google/fhir:json_format",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
-        "@com_google_fhir//proto/r4:uscore_cc_proto",
-        "@com_google_fhir//proto/r4/core:datatypes_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4:uscore_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core:datatypes_cc_proto",
     ],
 )
 
@@ -62,8 +62,8 @@ cc_binary(
         "@com_google_fhir//cc/google/fhir/r4:json_format",
         "@com_google_fhir//cc/google/fhir/r4:resource_validation",
         "@com_google_fhir//cc/google/fhir/status",
-        "@com_google_fhir//proto/r4:uscore_cc_proto",
-        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4:uscore_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_cc_proto",
     ],
 )
 
@@ -75,6 +75,6 @@ cc_binary(
         "//proto/google/fhir_examples/myprofile:myprofile_cc_proto",
         "@com_google_fhir//cc/google/fhir:json_format",
         "@com_google_fhir//cc/google/fhir/r4:profiles",
-        "@com_google_fhir//proto/r4/core/resources:patient_cc_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_cc_proto",
     ],
 )

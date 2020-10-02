@@ -15,7 +15,7 @@ java_binary(
     main_class = "com.google.fhirexamples.ParsePatients",
     deps = [
         "@com_google_fhir//java:json_format",
-        "@com_google_fhir//proto/r4/core/resources:patient_java_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_java_proto",
     ],
 )
 
@@ -27,7 +27,7 @@ java_binary(
         ":example_utils",
         "@com_google_fhir//java:common",
         "@com_google_fhir//java:resource_validator",
-        "@com_google_fhir//proto/r4/core/resources:patient_java_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_java_proto",
     ],
 )
 

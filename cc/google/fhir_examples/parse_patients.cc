@@ -18,7 +18,7 @@
 #include <vector>
 
 #include "google/fhir/r4/json_format.h"
-#include "proto/r4/core/resources/patient.pb.h"
+#include "proto/google/fhir/proto/r4/core/resources/patient.pb.h"
 #include "google/fhir_examples/example_utils.h"
 
 using std::string;

@@ -10,8 +10,8 @@ licenses(["notice"])
 gen_fhir_definitions_and_protos(
     name = "myprofile",
     additional_proto_imports = [
-        "proto/r4/uscore.proto",
-        "proto/r4/uscore_codes.proto",
+        "proto/google/fhir/proto/r4/uscore.proto",
+        "proto/google/fhir/proto/r4/uscore_codes.proto",
     ],
     extensions = [
         "extensions.prototxt",
@@ -29,12 +29,12 @@ fhir_proto_library(
     ],
     proto_deps = [
         "@com_google_protobuf//:any_proto",
-        "@com_google_fhir//proto:annotations_proto",
-        "@com_google_fhir//proto/r4:uscore_codes_proto",
-        "@com_google_fhir//proto/r4:uscore_proto",
-        "@com_google_fhir//proto/r4/core:codes_proto",
-        "@com_google_fhir//proto/r4/core:datatypes_proto",
-        "@com_google_fhir//proto/r4/core:extensions_proto",
+        "@com_google_fhir//proto/google/fhir/proto:annotations_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4:uscore_codes_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4:uscore_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core:codes_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core:datatypes_proto",
+        "@com_google_fhir//proto/google/fhir/proto/r4/core:extensions_proto",
     ],
     proto_library_prefix = "myprofile",
 )
