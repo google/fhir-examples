@@ -3,10 +3,10 @@ workspace(name = "com_google_fhir_examples")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "com_google_fhir",
-    sha256 = "def823d697511f4f02dcba368fa99282588cd96b2d765657db8242301d0688df",
-    strip_prefix = "fhir-d7b450f1179f7b3fb6edec91511004dbc196f394",
+    sha256 = "64e6a1ed624dcf68556761a04e1096119bfc52db1e0956fbcdabf3fa1478fdbb",
+    strip_prefix = "fhir-bba915b82dacb4d1b9571a134a4049ec3a24181c",
     urls = [
-        "https://github.com/google/fhir/archive/d7b450f1179f7b3fb6edec91511004dbc196f394.zip",
+        "https://github.com/google/fhir/archive/bba915b82dacb4d1b9571a134a4049ec3a24181c.zip",
     ],
 )
 
@@ -18,6 +18,16 @@ protobuf_deps()
 
 load("@com_google_fhir//bazel:workspace.bzl", "fhirproto_workspace")
 fhirproto_workspace()
+
+load("@rules_python//python:pip.bzl", "pip3_import", "pip_repositories")
+pip3_import(
+    name = "fhir_bazel_pip_dependencies",
+    requirements = "//py/google/fhir_examples:requirements.txt",
+)
+pip_repositories()
+
+load("@fhir_bazel_pip_dependencies//:requirements.bzl", "pip_install")
+pip_install()
 
 load("@com_google_fhir//bazel:go_dependencies.bzl", "fhir_go_dependencies")
 fhir_go_dependencies()
