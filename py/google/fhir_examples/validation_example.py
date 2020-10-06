@@ -14,12 +14,23 @@
 # limitations under the License.
 """Example code for using the resource_validation API to validate FhirProtos.
 
-To run:
+To run using bazel:
+```
 bazel build //py/google/fhir_examples:validation_example
 bazel-bin/py/google/fhir_examples:validation_example $WORKSPACE
+```
 
-where $WORKSPACE is the location of a synthea dataset.
-For instructions on setting up your workspace, see the top-level README.md
+To run using python+pip:
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install google-fhir
+
+python3 validation_example.py $WORKSPACE
+```
+
+Where $WORKSPACE is the location of a synthea dataset. For instructions on
+setting up your workspace, see the top-level README.md.
 """
 
 import random
