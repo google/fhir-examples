@@ -31,7 +31,9 @@ import java.util.List;
 /**
  * Example code for using JsonFormat to move back and forth from FHIR JSON <--> FHIR Proto
  *
- * <p>To run: bazel build //java:ParsePatients bazel-bin/java/ParsePatients $WORKSPACE
+ * <p>To run in Bazel: bazel build //java:ParsePatients bazel-bin/java/ParsePatients $WORKSPACE
+ *
+ * <p>To run in Gradle: ./gradlew run --args=$WORKSPACE
  *
  * <p>where $WORKSPACE is the location of a synthea dataset. For instructions on setting up your
  * workspace, see the top-level README.md

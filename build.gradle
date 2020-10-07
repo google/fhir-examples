@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+ext {
+    javaMainClass = "com.google.fhirexamples.ParsePatients"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'java/com/google/fhirexamples'
+            exclude {
+                // Only include ParsePatients.java
+                FileTreeElement details ->
+                    !details.file.name.endsWith('ParsePatients.java')
+            }
+        }
+    }
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.google.fhir:r4:0.6.1'
+}

@@ -10,6 +10,9 @@ For a more comprehensive explanation of the platform, see the [**User Guide**](h
 FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. We require a minimum Bazel version of [2.2.0](https://github.com/bazelbuild/bazel/releases/tag/2.2.0). Follow steps [here](https://docs.bazel.build/versions/master/install.html) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
 
 You can always check what version of Bazel you have by running `bazel --version`
+## Gradle integration
+
+This repository also provides an example of Gradle integration with the published Java library on Google's Maven repostitory. See `build.gradle` for how to set it up and `ParsePatients.java` for how to run it.
 ## Setting Up the Example Repository
 
 Next, we’ll clone the example repository into a git directory. If you don’t have a directory you already use for git code, `~/git` is perfectly reasonable:
