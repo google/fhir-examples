@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/status/statusor.h"
 #include "absl/strings/str_cat.h"
 #include "absl/time/time.h"
 #include "google/fhir/r4/json_format.h"

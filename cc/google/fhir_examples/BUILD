@@ -9,6 +9,7 @@ cc_library(
     hdrs = ["example_utils.h"],
     strip_include_prefix = "//cc/",
     deps = [
+        "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/time",
         "@com_google_fhir//cc/google/fhir/r4:json_format",
