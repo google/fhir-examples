@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "absl/strings/str_cat.h"
 #include "google/fhir/r4/json_format.h"
 #include "proto/google/fhir/proto/r4/core/resources/patient.pb.h"
 #include "google/fhir_examples/example_utils.h"
@@ -39,7 +40,7 @@ using ::google::fhir::r4::core::Patient;
 
 int main(int argc, char** argv) {
   if (argc == 1) {
-    std::cout << "Missing workspace argument." << std::endl;
+    std::cerr << "Missing workspace argument." << std::endl;
     return 1;
   }
   const std::string workspace = argv[1];
@@ -47,9 +48,14 @@ int main(int argc, char** argv) {
   absl::TimeZone time_zone;
   CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
 
-  std::ifstream read_stream;
   std::cout << "Reading " + absl::StrCat(workspace) << std::endl;
-  read_stream.open(absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson"));
+  const std::string file =
+      absl::StrCat(workspace, "/ndjson/Patient.fhir.ndjson");
+  std::ifstream read_stream(file);
+  if (!read_stream.is_open()) {
+    std::cerr << "Unable to open: " << file << "." << std::endl;
+    return 1;
+  }
 
   std::vector<Patient> result;
   std::string line;
@@ -58,6 +64,11 @@ int main(int argc, char** argv) {
     if (!line.length()) continue;
     result.push_back(JsonFhirStringToProto<Patient>(line, time_zone).value());
     std::cout << "Parsed Patient " << result.back().id().value() << std::endl;
+  }
+
+  if (result.empty()) {
+    std::cerr << "No data read from: " << file << "." << std::endl;
+    return 1;
   }
 
   const Patient& example_patient = result.front();

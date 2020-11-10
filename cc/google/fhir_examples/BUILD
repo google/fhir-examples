@@ -23,6 +23,7 @@ cc_binary(
     srcs = ["parse_patients.cc"],
     deps = [
         ":example_utils",
+        "@com_google_absl//absl/strings",
         "@com_google_fhir//cc/google/fhir/r4:json_format",
         "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_cc_proto",
     ],
