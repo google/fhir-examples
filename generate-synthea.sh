@@ -24,6 +24,10 @@ pushd $1
 git clone https://github.com/synthetichealth/synthea.git
 cd synthea
 
+# pin synthea to as a temporary workaround to avoid problematic references.
+# see more at: https://github.com/google/fhir/issues/24.
+git checkout 2a183ca0910ca06df3f25ce149a671876d8f5ae6
+
 # generate 1000 valid R4 bundles in output/fhir/
 ./run_synthea Massachusetts -p 1000
 
