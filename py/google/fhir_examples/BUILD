@@ -3,8 +3,6 @@ load(
     "py_binary",
 )
 
-load("@fhir_bazel_pip_dependencies//:requirements.bzl", "requirement")
-
 licenses(["notice"])
 
 py_binary(
@@ -30,5 +28,3 @@ py_binary(
         "@com_google_fhir//py/google/fhir/r4:resource_validation",
     ],
 )
-
-exports_files(["reqirements.txt"])

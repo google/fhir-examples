@@ -17,7 +17,7 @@
 To run via bazel:
 ```
 bazel build //py/google/fhir_examples:json_format_example
-bazel-bin/py/google/fhir_examples:json_format_example $WORKSPACE
+bazel-bin/py/google/fhir_examples/json_format_example $WORKSPACE
 ```
 
 To run using python+pip:

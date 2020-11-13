@@ -17,7 +17,7 @@
 To run using bazel:
 ```
 bazel build //py/google/fhir_examples:validation_example
-bazel-bin/py/google/fhir_examples:validation_example $WORKSPACE
+bazel-bin/py/google/fhir_examples/validation_example $WORKSPACE
 ```
 
 To run using python+pip:
