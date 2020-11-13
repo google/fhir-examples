@@ -22,7 +22,7 @@ fhirproto_workspace()
 load("@rules_python//python:pip.bzl", "pip3_import", "pip_repositories")
 pip3_import(
     name = "fhir_bazel_pip_dependencies",
-    requirements = "//py/google/fhir_examples:requirements.txt",
+    requirements = "@com_google_fhir//bazel:requirements.txt",
 )
 pip_repositories()
 
