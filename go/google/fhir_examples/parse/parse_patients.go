@@ -15,9 +15,13 @@
 // Package main provides example code for using jsonformat to move back and
 // forth from FHIR JSON <--> FHIR Proto.
 //
-// To run:
+// To run with bazel:
 //
 // 	bazel run //go/google/fhir_examples:parse_patients $WORKSPACE
+//
+// To run with native Go:
+//
+//  go run parse_patients.go $WORKSPACE
 //
 // where $WORKSPACE is the location of a synthea dataset.
 // For instructions on setting up your workspace, see the top-level README.md
