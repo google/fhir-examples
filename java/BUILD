@@ -25,7 +25,7 @@ java_binary(
     main_class = "com.google.fhirexamples.ValidatePatients",
     deps = [
         ":example_utils",
-        "@com_google_fhir//java/com/google/fhir/common",
+        "@com_google_fhir//java/com/google/fhir/common:exceptions",
         "@com_google_fhir//java/com/google/fhir/common:resource_validator",
         "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_java_proto",
     ],
