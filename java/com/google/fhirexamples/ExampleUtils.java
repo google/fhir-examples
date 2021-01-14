@@ -18,6 +18,7 @@ package com.google.fhirexamples;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.fhir.common.InvalidFhirException;
 import com.google.fhir.common.JsonFormat.Parser;
 import com.google.protobuf.Message;
 import java.io.BufferedReader;
@@ -30,7 +31,8 @@ import java.util.List;
 
 public class ExampleUtils {
 
-  public static <R extends Message> List<R> loadNdJson(R type, String filename) throws IOException {
+  public static <R extends Message> List<R> loadNdJson(R type, String filename)
+      throws IOException, InvalidFhirException {
     Parser fhirParser = Parser.withDefaultTimeZone(ZoneId.of("America/Los_Angeles"));
 
     System.out.println("Reading " + filename);

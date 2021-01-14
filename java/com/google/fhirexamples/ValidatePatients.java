@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class ValidatePatients {
 
-  public static void main(String[] argv) throws IOException {
+  public static void main(String[] argv) throws IOException, InvalidFhirException {
     List<Patient> patients =
         ExampleUtils.loadNdJson(
             Patient.getDefaultInstance(), argv[0] + "/ndjson/Patient.fhir.ndjson");

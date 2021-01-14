@@ -18,6 +18,7 @@ package com.google.fhirexamples;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.fhir.common.InvalidFhirException;
 import com.google.fhir.common.JsonFormat.Parser;
 import com.google.fhir.r4.core.Patient;
 import java.io.BufferedReader;
@@ -51,7 +52,11 @@ public class ParsePatients {
     String line;
     while ((line = reader.readLine()) != null) {
       Patient.Builder patient = Patient.newBuilder();
-      fhirParser.merge(line, patient);
+      try {
+        fhirParser.merge(line, patient);
+      } catch (InvalidFhirException e) {
+        System.out.println("Failed parsing record with message: " + e.getMessage());
+      }
       result.add(patient.build());
       System.out.println("Parsed patient " + patient.getId().getValue());
     }

@@ -4,6 +4,7 @@ java_library(
     name = "example_utils",
     srcs = ["com/google/fhirexamples/ExampleUtils.java"],
     deps = [
+        "@com_google_fhir//java/com/google/fhir/common:exceptions",
         "@com_google_fhir//java/com/google/fhir/common:json_format",
         "@com_google_protobuf//:protobuf_java",
     ],
@@ -14,6 +15,7 @@ java_binary(
     srcs = ["com/google/fhirexamples/ParsePatients.java"],
     main_class = "com.google.fhirexamples.ParsePatients",
     deps = [
+        "@com_google_fhir//java/com/google/fhir/common:exceptions",
         "@com_google_fhir//java/com/google/fhir/common:json_format",
         "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_java_proto",
     ],
