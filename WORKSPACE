@@ -3,10 +3,10 @@ workspace(name = "com_google_fhir_examples")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "com_google_fhir",
-    sha256 = "0173112fb292e3c9208f02d7efb86157ce869451b02aee62293698a2043b3b7d",
-    strip_prefix = "fhir-0.7.0",
+    sha256 = "6d1ac5ce3cdae2d6901b7f1a45a7505c8e420a3e1c6b044d2ce88cdd2248396d",
+    strip_prefix = "fhir-d345486e9dfbe2ec9040f9c998ec647e957d06a3",
     urls = [
-        "https://github.com/google/fhir/archive/v0.7.0.zip",
+        "https://github.com/google/fhir/archive/d345486e9dfbe2ec9040f9c998ec647e957d06a3.zip",
     ],
 )
 
