@@ -13,59 +13,6 @@ option java_multiple_files = true;
 option java_package = "com.mycompany.fhirexamples.myprofile";
 option (.google.fhir.proto.fhir_version) = R4;
 
-// Auto-generated from StructureDefinition for LikesPie.
-// Whether or not the patient likes pie.
-// See https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie
-message LikesPie {
-  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
-  option (.google.fhir.proto.fhir_profile_base) =
-      "http://hl7.org/fhir/StructureDefinition/Extension";
-  option (.google.fhir.proto.fhir_structure_definition_url) =
-      "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie";
-
-  // Unique id for inter-element referencing
-  .google.fhir.r4.core.String id = 1;
-
-  // Value of extension
-  .google.fhir.r4.core.Boolean value_boolean = 3;
-}
-
-// Auto-generated from StructureDefinition for Favorites.
-// complex extension.
-// See https://mycompany.com/fhir/myprofile/StructureDefinition/Favorites
-message Favorites {
-  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
-  option (.google.fhir.proto.fhir_profile_base) =
-      "http://hl7.org/fhir/StructureDefinition/Extension";
-  option (.google.fhir.proto.fhir_structure_definition_url) =
-      "https://mycompany.com/fhir/myprofile/StructureDefinition/Favorites";
-
-  // Unique id for inter-element referencing
-  .google.fhir.r4.core.String id = 1;
-
-  // Optional Extensions Element
-  .google.fhir.r4.core.Integer favorite_number = 4;
-
-  // Optional Extensions Element
-  message PetNames {
-    // Unique id for inter-element referencing
-    .google.fhir.r4.core.String id = 1;
-
-    // Extension.extension.extension not present on profile.
-    reserved 2;
-
-    // Extension.extension.value[x] not present on profile.
-    reserved 3;
-
-    // Optional Extensions Element
-    .google.fhir.r4.core.String cat = 4;
-
-    // Optional Extensions Element
-    repeated .google.fhir.r4.core.String dog = 5;
-  }
-  PetNames pet_names = 5;
-}
-
 // Auto-generated from StructureDefinition for DemoPatient.
 // Information about an individual or animal receiving health care services.
 // See https://mycompany.com/fhir/myprofile/StructureDefinition/DemoPatient
@@ -515,4 +462,57 @@ message DemoPatient {
   .google.fhir.r4.core.Boolean likes_pie = 31
       [(.google.fhir.proto.fhir_inlined_extension_url) =
            "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie"];
+}
+
+// Auto-generated from StructureDefinition for LikesPie.
+// Whether or not the patient likes pie.
+// See https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie
+message LikesPie {
+  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
+  option (.google.fhir.proto.fhir_profile_base) =
+      "http://hl7.org/fhir/StructureDefinition/Extension";
+  option (.google.fhir.proto.fhir_structure_definition_url) =
+      "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie";
+
+  // Unique id for inter-element referencing
+  .google.fhir.r4.core.String id = 1;
+
+  // Value of extension
+  .google.fhir.r4.core.Boolean value_boolean = 3;
+}
+
+// Auto-generated from StructureDefinition for Favorites.
+// complex extension.
+// See https://mycompany.com/fhir/myprofile/StructureDefinition/Favorites
+message Favorites {
+  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
+  option (.google.fhir.proto.fhir_profile_base) =
+      "http://hl7.org/fhir/StructureDefinition/Extension";
+  option (.google.fhir.proto.fhir_structure_definition_url) =
+      "https://mycompany.com/fhir/myprofile/StructureDefinition/Favorites";
+
+  // Unique id for inter-element referencing
+  .google.fhir.r4.core.String id = 1;
+
+  // Optional Extensions Element
+  .google.fhir.r4.core.Integer favorite_number = 4;
+
+  // Optional Extensions Element
+  message PetNames {
+    // Unique id for inter-element referencing
+    .google.fhir.r4.core.String id = 1;
+
+    // Extension.extension.extension not present on profile.
+    reserved 2;
+
+    // Extension.extension.value[x] not present on profile.
+    reserved 3;
+
+    // Optional Extensions Element
+    .google.fhir.r4.core.String cat = 4;
+
+    // Optional Extensions Element
+    repeated .google.fhir.r4.core.String dog = 5;
+  }
+  PetNames pet_names = 5;
 }
