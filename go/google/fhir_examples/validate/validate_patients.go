@@ -40,6 +40,7 @@ import (
 	"github.com/google/fhir/go/jsonformat/fhirvalidate"
 	"github.com/google/fhir/go/jsonformat"
 
+	"github.com/google/fhir/go/fhirversion"
 	d4pb "github.com/google/fhir/go/proto/google/fhir/proto/r4/core/datatypes_go_proto"
 	r4pb "github.com/google/fhir/go/proto/google/fhir/proto/r4/core/resources/bundle_and_contained_resource_go_proto"
 	p4pb "github.com/google/fhir/go/proto/google/fhir/proto/r4/core/resources/patient_go_proto"
@@ -57,7 +58,7 @@ func main() {
 	}
 
 	reader := bufio.NewReader(bytes.NewReader(testFile))
-	um, err := jsonformat.NewUnmarshaller(timeZone, jsonformat.R4)
+	um, err := jsonformat.NewUnmarshaller(timeZone, fhirversion.R4)
 	if err != nil {
 		log.Fatalf("Failed to create unmarshaller %v", err)
 	}

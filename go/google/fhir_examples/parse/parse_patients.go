@@ -35,8 +35,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/google/fhir/go/fhirversion"
 	"github.com/google/fhir/go/jsonformat"
-
 	r4pb "github.com/google/fhir/go/proto/google/fhir/proto/r4/core/resources/bundle_and_contained_resource_go_proto"
 )
 
@@ -56,7 +56,7 @@ func main() {
 		log.Fatalf("Failed reading patient %v", err)
 	}
 
-	um, err := jsonformat.NewUnmarshaller(timeZone, jsonformat.R4)
+	um, err := jsonformat.NewUnmarshaller(timeZone, fhirversion.R4)
 	if err != nil {
 		log.Fatalf("Failed to create unmarshaller %v", err)
 	}
