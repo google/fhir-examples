@@ -10,6 +10,7 @@ go_binary(
     name = "validate_patients",
     srcs = ["validate_patients.go"],
     deps = [
+        "@com_google_fhir//go/fhirversion",
         "@com_google_fhir//go/jsonformat",
         "@com_google_fhir//go/jsonformat/fhirvalidate",
         "@com_google_fhir//proto/google/fhir/proto/r4/core:datatypes_go_proto",
