@@ -10,7 +10,7 @@
         "name": "LikesPie",
         "title": "LikesPie",
         "status": "draft",
-        "date": "2020-05-18",
+        "date": "2021-10-19",
         "publisher": "Example Company LLC",
         "description": "Whether or not the patient likes pie.",
         "fhirVersion": "4.0.1",
@@ -301,7 +301,7 @@
         "name": "Favorites",
         "title": "Favorites",
         "status": "draft",
-        "date": "2020-05-18",
+        "date": "2021-10-19",
         "publisher": "Example Company LLC",
         "description": "complex extension",
         "fhirVersion": "4.0.1",
@@ -1774,10 +1774,6 @@
               ]
             },
             {
-              "id": "Extension.extension:favoriteNumber.id",
-              "path": "Extension.extension.id"
-            },
-            {
               "id": "Extension.extension:favoriteNumber.extension",
               "path": "Extension.extension.extension",
               "max": "0"
@@ -1828,10 +1824,6 @@
               ]
             },
             {
-              "id": "Extension.extension:petNames.id",
-              "path": "Extension.extension.id"
-            },
-            {
               "id": "Extension.extension:petNames.extension",
               "path": "Extension.extension.extension",
               "max": "0"
@@ -1876,10 +1868,6 @@
                   "source": "Extension"
                 }
               ]
-            },
-            {
-              "id": "Extension.extension:petNames.extension:cat.id",
-              "path": "Extension.extension.extension.id"
             },
             {
               "id": "Extension.extension:petNames.extension:cat.extension",
@@ -1929,10 +1917,6 @@
                   "source": "Extension"
                 }
               ]
-            },
-            {
-              "id": "Extension.extension:petNames.extension:dog.id",
-              "path": "Extension.extension.extension.id"
             },
             {
               "id": "Extension.extension:petNames.extension:dog.extension",
