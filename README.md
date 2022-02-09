@@ -23,8 +23,8 @@ cd ~/git
 Then, clone this repo using
 
 ```
-git clone https://github.com/google/fhir-example.git
-cd fhir-example
+git clone https://github.com/google/fhir-examples.git
+cd fhir-examples
 ```
 
 Next, we’ll generate a synthetic FHIR JSON dataset, using [Synthea](https://github.com/synthetichealth/synthea), via the `generate-synthea.sh` script. We’ll need a workspace directory for this dataset - here we’ll use `~/fhirdata/`
