@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
   }
 
   for (USCorePatientProfile& patient : patients) {
-    absl::Status status = google::fhir::r4::ValidateResource(patient);
+    absl::Status status = google::fhir::r4::ValidateWithoutFhirPath(patient);
     if (!status.ok()) {
       std::cout << "Patient " << patient.identifier(0).value().value()
                 << " is invalid: " << status.message() << "\n\n"
