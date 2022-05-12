@@ -23,7 +23,7 @@ py_binary(
     python_version = "PY3",
     deps = [
         "@com_google_fhir//proto/google/fhir/proto/r4/core/resources:patient_py_pb2",
-        "@com_google_fhir//py/google/fhir:fhir_errors",
+        "@com_google_fhir//py/google/fhir/core:fhir_errors",
         "@com_google_fhir//py/google/fhir/r4:json_format",
         "@com_google_fhir//py/google/fhir/r4:resource_validation",
     ],

@@ -35,7 +35,7 @@ setting up your workspace, see the top-level README.md.
 import random
 from absl import app
 from proto.google.fhir.proto.r4.core.resources import patient_pb2
-from google.fhir import fhir_errors
+from google.fhir.core import fhir_errors
 from google.fhir.r4 import json_format
 from google.fhir.r4 import resource_validation
 
