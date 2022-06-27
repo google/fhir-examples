@@ -4,7 +4,7 @@ This repository contains examples of how to use the __FhirProto__ platform at [g
 
 The rest of this README contains instructions for setting up an environment for working with __FhirProto__.  For instructions on running the examples, check out [EXAMPLES.md](github.com/google/fhir-examples/blob/master/EXAMPLES.md).
 
-For a more comprehensive explanation of the platform, see the [**User Guide**](https://github.com/google/fhir/blob/master/USERGUIDE.md) at the main repo
+For a more comprehensive explanation of the platform, see the [**User Guide**](https://github.com/google/fhir-examples/blob/master/USERGUIDE.md) at the main repo
 ## Setting Up Bazel
 
 FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. We require a minimum Bazel version of [2.2.0](https://github.com/bazelbuild/bazel/releases/tag/2.2.0). Follow steps [here](https://docs.bazel.build/versions/master/install.html) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
@@ -23,8 +23,8 @@ cd ~/git
 Then, clone this repo using
 
 ```
-git clone https://github.com/google/fhir-example.git
-cd fhir-example
+git clone https://github.com/google/fhir-examples.git
+cd fhir-examples
 ```
 
 Next, we’ll generate a synthetic FHIR JSON dataset, using [Synthea](https://github.com/synthetichealth/synthea), via the `generate-synthea.sh` script. We’ll need a workspace directory for this dataset - here we’ll use `~/fhirdata/`
