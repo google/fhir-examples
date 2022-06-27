@@ -7,17 +7,16 @@ FhirProto is Google’s implementation of the [FHIR Standard](http://hl7.org/fhi
 
 # Using this Guide
 
-This guide describes how to use the FhirProto github repository at [https://github.com/google/fhir/](https://github.com/google/fhir/).  However, unless you want to actively tweak the implementation of FhirProto, you don’t need to clone this repository, and instead should include it as an external dependency.  To demonstrate how this works, this guide makes use of a separate repository, [https://github.com/google/fhir-examples](https://github.com/google/fhir-examples).  This repo contains a script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying.  Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
+This guide describes how to use the FhirProto github repository at [https://github.com/google/fhir/](https://github.com/google/fhir/).  However, unless you want to actively tweak the implementation of FhirProto, you don’t need to clone that repository, and instead should include it as an external dependency. This guide will demonstrate how that works.
+This repository, [https://github.com/google/fhir-examples](https://github.com/google/fhir-examples) contains a script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying. Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
 
 This guide represents a reference with in-depth descriptions of different concepts, but if you just want to jump in and try working with FHIR, head over to the [Examples](https://github.com/google/fhir-examples/blob/master/EXAMPLES.md) document.
 
-
 ## Setting Up
 
-FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. Installation is pretty simple, but there is one wrinkle: __Tensorflow does not yet support Bazel 1.X, so you need to use a 0.X version.  We recommend [0.29.1](https://github.com/bazelbuild/bazel/releases/tag/0.29.1), the latest 0.X release__.  Other than that, follow the steps [here]([https://docs.bazel.build/versions/master/install.html](https://bazel.build/install) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
+FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. We require a minimum Bazel version of [2.2.0](https://github.com/bazelbuild/bazel/releases/tag/2.2.0). Follow steps [here](https://bazel.build/install) to download and run the install script. 
 
-__Important:__ Remember, you cannot use Bazel 1.X yet - if you do, you will get very strange error messages like "This attribute was removed".  You can always check what version of Bazel you have by running `bazel --version`
-
+**Pro-tip:** make sure not to drop the `--user` flag when running the script. Verify that bazel is installed correctly by running `bazel --version`.
 
 ## Add Proto Generation scripts to your bin
 
