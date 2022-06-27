@@ -71,7 +71,7 @@ These proto files can then be compiled into structures in nearly any language yo
 
 ### Resources
 
-Take a look at the Proto definition of the [Patient](https://github.com/google/fhir/blob/master/proto/r4/core/resources/patient.proto#L32) message.  The proto fields correspond pretty closely to the fields in the [StructureDefinition defined by FHIR](https://www.hl7.org/fhir/patient.html). It references FHIR primitive types and datatypes defined in [datatypes.proto](https://github.com/google/fhir/blob/master/proto/r4/core/datatypes.proto).
+Take a look at the Proto definition of the [Patient](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto#L32) message.  The proto fields correspond pretty closely to the fields in the [StructureDefinition defined by FHIR](https://www.hl7.org/fhir/patient.html). It references FHIR primitive types and datatypes defined in [datatypes.proto](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/datatypes.proto).
 
 
 
@@ -122,7 +122,7 @@ The precise moment indicated by the datetime is stored in the first field as mic
 
 ### Codes, CodeSystems and ValueSets
 
-In FHIR JSON, codes are represented as strings, even in places where the code is bound to a set of possible values.  This makes bindings hard to enforce, and makes it easy for incorrect codes to slip in.  FhirProto, on the other hand, can comprehend [Code System](https://github.com/google/fhir/blob/master/proto/r4/core/codes.proto) and [Value Sets](https://github.com/google/fhir/blob/master/proto/r4/core/valuesets.proto) and generate enums for them, for instance:
+In FHIR JSON, codes are represented as strings, even in places where the code is bound to a set of possible values.  This makes bindings hard to enforce, and makes it easy for incorrect codes to slip in.  FhirProto, on the other hand, can comprehend [Code System](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/codes.proto) and [Value Sets](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/valuesets.proto) and generate enums for them, for instance:
 
 ```
 message AdministrativeGenderCode {
@@ -165,7 +165,7 @@ This means that it is literally impossible to have a patient with an invalid gen
 
 ### References
 
-[References](https://github.com/google/fhir/blob/master/proto/r4/core/datatypes.proto#L3281) are represented in proto form as a struct with many fields representing the different kinds of references that are possible in a FHIR reference.  Note that since these are in a proto `oneof`, only one can be populated at any given time.  In addition to the `uri` and `fragment` fields, there is a field for each resource type that the reference could refer to.  For example, when parsing from JSON, a reference of the type `Patient/1234` will have `1234` in the `patient_id` field.
+[References](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/datatypes.proto#L3281) are represented in proto form as a struct with many fields representing the different kinds of references that are possible in a FHIR reference.  Note that since these are in a proto `oneof`, only one can be populated at any given time.  In addition to the `uri` and `fragment` fields, there is a field for each resource type that the reference could refer to.  For example, when parsing from JSON, a reference of the type `Patient/1234` will have `1234` in the `patient_id` field.
 
 Currently, there is no compile-time guarantee that only valid reference fields are populated - in other words, it’s possible to accidentally populate the `patient_id` field of `[Patient.practitioner](https://github.com/google/fhir/blob/master/proto/r4/core/resources/patient.proto#L203)`, even though it is invalid to refer to a patient in that field.  Instead, validation is handled by a `valid_reference_type` annotation on the field, which will cause incorrect references to get flagged by the Resource Validation APIs.  There is a plan for future versions of FhirProto to generate custom Reference protos per field with only the valid reference type fields.  This will remove the need for validation,  since it will be impossible to populate the incorrect reference field.
 
@@ -199,7 +199,7 @@ In C++, parsing and printing is handled by **[json_format.h](https://github.com/
 
 ### C++ Example
 
-The FhirProto-Examples library contains an example of using the C++ parser/printer: [ParsePatients](https://github.com/google/fhir-examples/blob/master/cc/parse_patients.cc).  This example reads all the Patient resources in the ndjson directory of the synthea workspace, and parses them into [Patient](https://github.com/google/fhir/blob/master/proto/r4/core/resources/patient.proto) protos.  To show what this looks like, it then prints the first patient proto to a string.  Finally, it prints an info sentence about the patient, showing what data access looks like.
+The FhirProto-Examples library contains an example of using the C++ parser/printer: [ParsePatients](https://github.com/google/fhir-examples/blob/master/cc/parse_patients.cc).  This example reads all the Patient resources in the ndjson directory of the synthea workspace, and parses them into [Patient](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto) protos.  To show what this looks like, it then prints the first patient proto to a string.  Finally, it prints an info sentence about the patient, showing what data access looks like.
 
 To run the example, first build with
 
