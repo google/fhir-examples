@@ -14,7 +14,7 @@ This guide represents a reference with in-depth descriptions of different concep
 
 ## Setting Up
 
-FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. Installation is pretty simple, but there is one wrinkle: __Tensorflow does not yet support Bazel 1.X, so you need to use a 0.X version.  We recommend [0.29.1](https://github.com/bazelbuild/bazel/releases/tag/0.29.1), the latest 0.X release__.  Other than that, follow the steps [here](https://docs.bazel.build/versions/master/install.html) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
+FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. Installation is pretty simple, but there is one wrinkle: __Tensorflow does not yet support Bazel 1.X, so you need to use a 0.X version.  We recommend [0.29.1](https://github.com/bazelbuild/bazel/releases/tag/0.29.1), the latest 0.X release__.  Other than that, follow the steps [here]([https://docs.bazel.build/versions/master/install.html](https://bazel.build/install)) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
 
 __Important:__ Remember, you cannot use Bazel 1.X yet - if you do, you will get very strange error messages like "This attribute was removed".  You can always check what version of Bazel you have by running `bazel --version`
 
