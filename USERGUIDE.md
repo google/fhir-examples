@@ -7,16 +7,17 @@ FhirProto is Google’s implementation of the [FHIR Standard](http://hl7.org/fhi
 
 # Using this Guide
 
-This guide describes how to use the FhirProto github repository at [https://github.com/google/fhir/](https://github.com/google/fhir/).  However, unless you want to actively tweak the implementation of FhirProto, you don’t need to clone this repository, and instead should include it as an external dependency.  To demonstrate how this works, this guide makes use of a separate repository, [https://github.com/google/fhir-example](https://github.com/google/fhir-example).  This repo contains a script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying.  Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
+This guide describes how to use the FhirProto github repository at [https://github.com/google/fhir/](https://github.com/google/fhir/).  However, unless you want to actively tweak the implementation of FhirProto, you don’t need to clone that repository, and instead should include it as an external dependency. This guide will demonstrate how that works.
+This repository, [https://github.com/google/fhir-examples](https://github.com/google/fhir-examples) contains a script for using [Synthea](https://github.com/synthetichealth/synthea) to create a synthetic FHIR JSON dataset, and then shows some examples of parsing, printing, validating, profiling and querying. Some of these examples are left intentionally incomplete, to leave exercises to go along with this guide.
 
 This guide represents a reference with in-depth descriptions of different concepts, but if you just want to jump in and try working with FHIR, head over to the [Examples](https://github.com/google/fhir-examples/blob/master/EXAMPLES.md) document.
 
 
 ## Setting Up
 
-FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. Installation is pretty simple, but there is one wrinkle: __Tensorflow does not yet support Bazel 1.X, so you need to use a 0.X version.  We recommend [0.29.1](https://github.com/bazelbuild/bazel/releases/tag/0.29.1), the latest 0.X release__.  Other than that, follow the steps [here](https://docs.bazel.build/versions/master/install.html) to download and run the install script. Pro-tip: make sure not to drop the `--user` flag when running the script.  Verify that bazel is installed correctly by running `bazel --version`.
+FhirProto uses [Bazel](https://bazel.build/) as its dependency management/build tool. This is a declarative build system used by Google, Tensorflow, and many others. We require a minimum Bazel version of [2.2.0](https://github.com/bazelbuild/bazel/releases/tag/2.2.0). Follow steps [here](https://bazel.build/install) to download and run the install script.
 
-__Important:__ Remember, you cannot use Bazel 1.X yet - if you do, you will get very strange error messages like "This attribute was removed".  You can always check what version of Bazel you have by running `bazel --version`
+**Pro-tip:** make sure not to drop the `--user` flag when running the script. Verify that bazel is installed correctly by running `bazel --version`.
 
 
 ## Add Proto Generation scripts to your bin
@@ -71,7 +72,7 @@ These proto files can then be compiled into structures in nearly any language yo
 
 ### Resources
 
-Take a look at the Proto definition of the [Patient](https://github.com/google/fhir/blob/master/proto/r4/core/resources/patient.proto#L32) message.  The proto fields correspond pretty closely to the fields in the [StructureDefinition defined by FHIR](https://www.hl7.org/fhir/patient.html). It references FHIR primitive types and datatypes defined in [datatypes.proto](https://github.com/google/fhir/blob/master/proto/r4/core/datatypes.proto).
+Take a look at the Proto definition of the [Patient](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto#L32) message.  The proto fields correspond pretty closely to the fields in the [StructureDefinition defined by FHIR](https://www.hl7.org/fhir/patient.html). It references FHIR primitive types and datatypes defined in [datatypes.proto](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/datatypes.proto).
 
 
 
@@ -122,7 +123,7 @@ The precise moment indicated by the datetime is stored in the first field as mic
 
 ### Codes, CodeSystems and ValueSets
 
-In FHIR JSON, codes are represented as strings, even in places where the code is bound to a set of possible values.  This makes bindings hard to enforce, and makes it easy for incorrect codes to slip in.  FhirProto, on the other hand, can comprehend [Code System](https://github.com/google/fhir/blob/master/proto/r4/core/codes.proto) and [Value Sets](https://github.com/google/fhir/blob/master/proto/r4/core/valuesets.proto) and generate enums for them, for instance:
+In FHIR JSON, codes are represented as strings, even in places where the code is bound to a set of possible values.  This makes bindings hard to enforce, and makes it easy for incorrect codes to slip in.  FhirProto, on the other hand, can comprehend [Code System](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/codes.proto) and [Value Sets](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/valuesets.proto) and generate enums for them, for instance:
 
 ```
 message AdministrativeGenderCode {
@@ -165,9 +166,9 @@ This means that it is literally impossible to have a patient with an invalid gen
 
 ### References
 
-[References](https://github.com/google/fhir/blob/master/proto/r4/core/datatypes.proto#L3281) are represented in proto form as a struct with many fields representing the different kinds of references that are possible in a FHIR reference.  Note that since these are in a proto `oneof`, only one can be populated at any given time.  In addition to the `uri` and `fragment` fields, there is a field for each resource type that the reference could refer to.  For example, when parsing from JSON, a reference of the type `Patient/1234` will have `1234` in the `patient_id` field.
+[References](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/datatypes.proto#L3281) are represented in proto form as a struct with many fields representing the different kinds of references that are possible in a FHIR reference.  Note that since these are in a proto `oneof`, only one can be populated at any given time.  In addition to the `uri` and `fragment` fields, there is a field for each resource type that the reference could refer to.  For example, when parsing from JSON, a reference of the type `Patient/1234` will have `1234` in the `patient_id` field.
 
-Currently, there is no compile-time guarantee that only valid reference fields are populated - in other words, it’s possible to accidentally populate the `patient_id` field of `[Patient.practitioner](https://github.com/google/fhir/blob/master/proto/r4/core/resources/patient.proto#L203)`, even though it is invalid to refer to a patient in that field.  Instead, validation is handled by a `valid_reference_type` annotation on the field, which will cause incorrect references to get flagged by the Resource Validation APIs.  There is a plan for future versions of FhirProto to generate custom Reference protos per field with only the valid reference type fields.  This will remove the need for validation,  since it will be impossible to populate the incorrect reference field.
+Currently, there is no compile-time guarantee that only valid reference fields are populated - in other words, it’s possible to accidentally populate the `patient_id` field of `[Patient.practitioner](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto#L203)`, even though it is invalid to refer to a patient in that field.  Instead, validation is handled by a `valid_reference_type` annotation on the field, which will cause incorrect references to get flagged by the Resource Validation APIs.  There is a plan for future versions of FhirProto to generate custom Reference protos per field with only the valid reference type fields.  This will remove the need for validation,  since it will be impossible to populate the incorrect reference field.
 
 
 ## Validation
@@ -199,7 +200,7 @@ In C++, parsing and printing is handled by **[json_format.h](https://github.com/
 
 ### C++ Example
 
-The FhirProto-Examples library contains an example of using the C++ parser/printer: [ParsePatients](https://github.com/google/fhir-examples/blob/master/cc/parse_patients.cc).  This example reads all the Patient resources in the ndjson directory of the synthea workspace, and parses them into [Patient](https://github.com/google/fhir/blob/master/proto/r4/core/resources/patient.proto) protos.  To show what this looks like, it then prints the first patient proto to a string.  Finally, it prints an info sentence about the patient, showing what data access looks like.
+The FhirProto-Examples library contains an example of using the C++ parser/printer: [ParsePatients](https://github.com/google/fhir-examples/blob/master/cc/parse_patients.cc).  This example reads all the Patient resources in the ndjson directory of the synthea workspace, and parses them into [Patient](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto) protos.  To show what this looks like, it then prints the first patient proto to a string.  Finally, it prints an info sentence about the patient, showing what data access looks like.
 
 To run the example, first build with
 
@@ -275,7 +276,7 @@ Given a profile of a resource, FhirProto will generate a customized version of t
 
 Extensions allow defining custom data that can be added to resources and datatypes.  All extensions consist of a url-payload pair, where the url defines the meaning as well as the format of the payload.  Extensions come in two forms: **Simple **and **Complex**.  In both cases, the FhirProto Generator is capable of generating data structures out of extension definitions.
 
-**Simple** extensions are extensions where the payload consists entirely of a single FHIR datatype, e.g, string, decimal, or code.  Example: the **[US-Core Birthsex](http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex)** extension is defined to be a **code**, bound to the [Birthsex ValueSet](http://hl7.org/fhir/us/core/STU3/ValueSet-birthsex.html).  In this case, the [generated extension](https://github.com/google/fhir/blob/master/proto/r4/uscore.proto#L834) has a value field with the appropriate code type.  This is a slightly more complicated case because it uses a code type with a bound value set, meaning that the definition also defines a custom submessage (INSERT LINK TO PREVIOUS DISCUSSION OF CODE HANDLING) - in cases with more straightforward datatypes no submessage is needed.  For example, the [Allergy Intolerance Asserted Date](http://hl7.org/fhir/extension-allergyintolerance-asserteddate.html) extension definition just generates a [proto with a DateTime value field](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/core/extensions.proto#L3734).
+**Simple** extensions are extensions where the payload consists entirely of a single FHIR datatype, e.g, string, decimal, or code.  Example: the **[US-Core Birthsex](http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex)** extension is defined to be a **code**, bound to the [Birthsex ValueSet](http://hl7.org/fhir/us/core/STU3/ValueSet-birthsex.html).  In this case, the [generated extension](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/uscore.proto#L834) has a value field with the appropriate code type.  This is a slightly more complicated case because it uses a code type with a bound value set, meaning that the definition also defines a custom submessage (INSERT LINK TO PREVIOUS DISCUSSION OF CODE HANDLING) - in cases with more straightforward datatypes no submessage is needed.  For example, the [Allergy Intolerance Asserted Date](http://hl7.org/fhir/extension-allergyintolerance-asserteddate.html) extension definition just generates a [proto with a DateTime value field](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/core/extensions.proto#L3734).
 
 **Complex** extensions consist of extensions where the value field is empty, but the extension itself has extensions.  In this case, the entire structure is defined by the url in the top-level extension, and in the sub-extension, instead of the url field being the url to a payload definition, it’s a simple field name.  This allows extensions to encode arbitrarily complicated data.  An example of this is the [Questionnaire Constraint](http://hl7.org/fhir/StructureDefinition/questionnaire-constraint) extension, which defines several fields, each of which turn into fields on the [proto definition](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/core/extensions.proto#L3794).  Returning to our US-Core patient extension example, we see the [Ethnicity](http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity) extension, which similarly generates a [proto structure](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/uscore.proto#L2716) with several fields.  Again, this is a slightly more complicated example, because the bound codings require generating custom data structures, but the principle is the same - we read the Extension definition, and generate a corresponding data structure that is as strongly typed as possible.
 
@@ -341,14 +342,14 @@ As an example of this, consider the **US Core** protos:
 
 1.  A [US Core PackageInfo](https://github.com/google/fhir/blob/master/spec/uscore_r4_package_info.prototxt)
 1.  A [fhir_package](https://github.com/google/fhir/blob/master/spec/BUILD#L81) defines all the inputs for the package as `//spec:uscore_r4_package`
-1.  A [gen_fhir_protos](https://github.com/google/fhir/blob/master/proto/r4/BUILD#L22) rule makes a target for the generation script at `//proto/r4:uscore`.  Note that since this package does not depend on any other profiles, we don’t need to declare any dependencies on other fhir packages.
+1.  A [gen_fhir_protos](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/BUILD#L22) rule makes a target for the generation script at `//proto/r4:uscore`.  Note that since this package does not depend on any other profiles, we don’t need to declare any dependencies on other fhir packages.
 1.  The protos can be regenerated using `generate_protos.sh //proto/r4:uscore`
 
 One more example, the **QI Core** which extends from **US Core:**
 
 1.  A [QI Core PackageInfo](https://github.com/google/fhir/blob/master/spec/qicore_r4_package_info.prototxt)
 1.  A [fhir_package](https://github.com/google/fhir/blob/master/spec/BUILD#L101) defines all the inputs for the package
-1.  A [gen_fhir_protos](https://github.com/google/fhir/blob/master/proto/r4/qicore/BUILD#L28) rule makes a target for the generation script at `//proto/r4:uscore`.  In this case, `//spec:uscore_r4_package` is declared as a dependency, because the QI Core profiles are sub-profiles of US Core
+1.  A [gen_fhir_protos](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/qicore/BUILD#L28) rule makes a target for the generation script at `//proto/r4:uscore`.  In this case, `//spec:uscore_r4_package` is declared as a dependency, because the QI Core profiles are sub-profiles of US Core
 1.  The protos can be regenerated using `generate_protos.sh //proto/r4:uscore`
 
 
