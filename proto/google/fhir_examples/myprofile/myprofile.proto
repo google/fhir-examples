@@ -464,23 +464,6 @@ message DemoPatient {
            "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie"];
 }
 
-// Auto-generated from StructureDefinition for LikesPie.
-// Whether or not the patient likes pie.
-// See https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie
-message LikesPie {
-  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
-  option (.google.fhir.proto.fhir_profile_base) =
-      "http://hl7.org/fhir/StructureDefinition/Extension";
-  option (.google.fhir.proto.fhir_structure_definition_url) =
-      "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie";
-
-  // Unique id for inter-element referencing
-  .google.fhir.r4.core.String id = 1;
-
-  // Value of extension
-  .google.fhir.r4.core.Boolean value_boolean = 3;
-}
-
 // Auto-generated from StructureDefinition for Favorites.
 // complex extension.
 // See https://mycompany.com/fhir/myprofile/StructureDefinition/Favorites
@@ -515,4 +498,21 @@ message Favorites {
     repeated .google.fhir.r4.core.String dog = 5;
   }
   PetNames pet_names = 5;
+}
+
+// Auto-generated from StructureDefinition for LikesPie.
+// Whether or not the patient likes pie.
+// See https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie
+message LikesPie {
+  option (.google.fhir.proto.structure_definition_kind) = KIND_COMPLEX_TYPE;
+  option (.google.fhir.proto.fhir_profile_base) =
+      "http://hl7.org/fhir/StructureDefinition/Extension";
+  option (.google.fhir.proto.fhir_structure_definition_url) =
+      "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie";
+
+  // Unique id for inter-element referencing
+  .google.fhir.r4.core.String id = 1;
+
+  // Value of extension
+  .google.fhir.r4.core.Boolean value_boolean = 3;
 }
