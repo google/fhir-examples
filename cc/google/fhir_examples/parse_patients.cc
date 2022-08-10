@@ -46,7 +46,10 @@ int main(int argc, char** argv) {
   const std::string workspace = argv[1];
 
   absl::TimeZone time_zone;
-  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
+  if (!absl::LoadTimeZone("America/Los_Angeles", &time_zone)) {
+    std::cout << "Failed loading timezone" << std::endl;
+    exit(1);
+  }
 
   std::cout << "Reading " + absl::StrCat(workspace) << std::endl;
   const std::string file =

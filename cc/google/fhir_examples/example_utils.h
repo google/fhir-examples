@@ -36,7 +36,10 @@ std::vector<R> ReadNdJsonFile(std::string filename) {
   read_stream.open(absl::StrCat(filename));
 
   absl::TimeZone time_zone;
-  CHECK(absl::LoadTimeZone("America/Los_Angeles", &time_zone));
+  if (!absl::LoadTimeZone("America/Los_Angeles", &time_zone)) {
+    std::cout << "Failed loading timezone" << std::endl;
+    exit(1);
+  }
 
   std::vector<R> result;
   std::string line;
