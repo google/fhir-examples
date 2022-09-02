@@ -10,7 +10,7 @@
         "name": "DemoPatient",
         "title": "DemoPatient",
         "status": "draft",
-        "date": "2021-10-19",
+        "date": "2022-09-01",
         "publisher": "Example Company LLC",
         "description": "Extension of US Core Patient for FHIR Profile demo",
         "fhirVersion": "4.0.1",
@@ -4411,7 +4411,7 @@
                   }
                 ],
                 "ordered": false,
-                "rules": "closed"
+                "rules": "open"
               },
               "short": "Code defined by a terminology system",
               "definition": "A reference to a code defined by a terminology system.",
@@ -4940,7 +4940,7 @@
                   }
                 ],
                 "ordered": false,
-                "rules": "closed"
+                "rules": "open"
               }
             },
             {

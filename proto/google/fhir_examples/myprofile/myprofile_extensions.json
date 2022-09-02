@@ -10,7 +10,7 @@
         "name": "LikesPie",
         "title": "LikesPie",
         "status": "draft",
-        "date": "2021-10-19",
+        "date": "2022-09-01",
         "publisher": "Example Company LLC",
         "description": "Whether or not the patient likes pie.",
         "fhirVersion": "4.0.1",
@@ -214,8 +214,8 @@
               ]
             },
             {
-              "id": "Extension.valueBoolean",
-              "path": "Extension.valueBoolean",
+              "id": "Extension.value[x]",
+              "path": "Extension.value[x]",
               "short": "Value of extension",
               "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
               "min": 0,
@@ -281,8 +281,8 @@
               "fixedUri": "https://mycompany.com/fhir/myprofile/StructureDefinition/LikesPie"
             },
             {
-              "id": "Extension.valueBoolean",
-              "path": "Extension.valueBoolean",
+              "id": "Extension.value[x]",
+              "path": "Extension.value[x]",
               "type": [
                 {
                   "code": "boolean"
@@ -301,7 +301,7 @@
         "name": "Favorites",
         "title": "Favorites",
         "status": "draft",
-        "date": "2021-10-19",
+        "date": "2022-09-01",
         "publisher": "Example Company LLC",
         "description": "complex extension",
         "fhirVersion": "4.0.1",
@@ -870,8 +870,8 @@
               ]
             },
             {
-              "id": "Extension.extension:favoriteNumber.valueInteger",
-              "path": "Extension.extension.valueInteger",
+              "id": "Extension.extension:favoriteNumber.value[x]",
+              "path": "Extension.extension.value[x]",
               "short": "Value of extension",
               "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
               "min": 0,
@@ -1453,8 +1453,8 @@
               ]
             },
             {
-              "id": "Extension.extension:petNames.extension:cat.valueString",
-              "path": "Extension.extension.extension.valueString",
+              "id": "Extension.extension:petNames.extension:cat.value[x]",
+              "path": "Extension.extension.extension.value[x]",
               "short": "Value of extension",
               "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
               "min": 0,
@@ -1671,8 +1671,8 @@
               ]
             },
             {
-              "id": "Extension.extension:petNames.extension:dog.valueString",
-              "path": "Extension.extension.extension.valueString",
+              "id": "Extension.extension:petNames.extension:dog.value[x]",
+              "path": "Extension.extension.extension.value[x]",
               "short": "Value of extension",
               "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
               "min": 0,
@@ -1784,8 +1784,8 @@
               "fixedUri": "favoriteNumber"
             },
             {
-              "id": "Extension.extension:favoriteNumber.valueInteger",
-              "path": "Extension.extension.valueInteger",
+              "id": "Extension.extension:favoriteNumber.value[x]",
+              "path": "Extension.extension.value[x]",
               "type": [
                 {
                   "code": "integer"
@@ -1880,8 +1880,8 @@
               "fixedUri": "cat"
             },
             {
-              "id": "Extension.extension:petNames.extension:cat.valueString",
-              "path": "Extension.extension.extension.valueString",
+              "id": "Extension.extension:petNames.extension:cat.value[x]",
+              "path": "Extension.extension.extension.value[x]",
               "type": [
                 {
                   "code": "string"
@@ -1929,8 +1929,8 @@
               "fixedUri": "dog"
             },
             {
-              "id": "Extension.extension:petNames.extension:dog.valueString",
-              "path": "Extension.extension.extension.valueString",
+              "id": "Extension.extension:petNames.extension:dog.value[x]",
+              "path": "Extension.extension.extension.value[x]",
               "type": [
                 {
                   "code": "string"
