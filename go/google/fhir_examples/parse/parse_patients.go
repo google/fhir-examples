@@ -73,7 +73,7 @@ func main() {
 	fmt.Printf("%s %s was born on %d", firstName, familyName, birthDate)
 
 	// Uncomment to see the first record converted back to FHIR JSON form.
-	// m, err := jsonformat.NewPrettyMarshaller(jsonformat.R4)
+	// m, err := jsonformat.NewPrettyMarshaller(fhirversion.R4)
 	// if err != nil {
 	// 	 log.Fatalf("Failed to create marshaller %v", err)
 	// }
