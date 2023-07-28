@@ -168,7 +168,7 @@ This means that it is literally impossible to have a patient with an invalid gen
 
 [References](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/datatypes.proto#L3281) are represented in proto form as a struct with many fields representing the different kinds of references that are possible in a FHIR reference.  Note that since these are in a proto `oneof`, only one can be populated at any given time.  In addition to the `uri` and `fragment` fields, there is a field for each resource type that the reference could refer to.  For example, when parsing from JSON, a reference of the type `Patient/1234` will have `1234` in the `patient_id` field.
 
-Currently, there is no compile-time guarantee that only valid reference fields are populated - in other words, it’s possible to accidentally populate the `patient_id` field of `[Patient.practitioner](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto#L203)`, even though it is invalid to refer to a patient in that field.  Instead, validation is handled by a `valid_reference_type` annotation on the field, which will cause incorrect references to get flagged by the Resource Validation APIs.  There is a plan for future versions of FhirProto to generate custom Reference protos per field with only the valid reference type fields.  This will remove the need for validation,  since it will be impossible to populate the incorrect reference field.
+Currently, there is no compile-time guarantee that only valid reference fields are populated - in other words, it’s possible to accidentally populate the `patient_id` field of [`Patient.practitioner`](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/core/resources/patient.proto#L203), even though it is invalid to refer to a patient in that field.  Instead, validation is handled by a `valid_reference_type` annotation on the field, which will cause incorrect references to get flagged by the Resource Validation APIs.  There is a plan for future versions of FhirProto to generate custom Reference protos per field with only the valid reference type fields.  This will remove the need for validation,  since it will be impossible to populate the incorrect reference field.
 
 
 ## Validation
@@ -194,7 +194,7 @@ In C++, parsing and printing is handled by **[json_format.h](https://github.com/
 *   **`JsonFhirStringToProtoWithoutValidating<R>`**: This is identical to `JsonFhirStringToProto` but does not validate for FHIR resource/profile requirements.
     *   **Important:**  This will not check that required fields are set, but it will still fail if JSON data is invalid - e.g., it encounters a field in the JSON that doesn’t have a corresponding field in the Proto, or it encounters a malformed primitive, like `-1` for a `PositiveInt`, or a bound `Code` field with a string that is not in the bound value set.
 *   **`PrintFhirToJsonString`**: This converts a FHIR proto to a single-line JSON string, suitable for use as a row of NDJSON.  This has a **`PrettyFhirToJsonString`** variant, that prints multi-line, formatted JSON.
-*   **`PrintFhirToJsonStringForAnalytics`**: This converts a FHIR proto to a single-line [Analytic FHIR JSON](https://github.com/FHIR/sql-on-fhir/blob/master/sql-on-fhir.md).  See section **Analytic Printing and Big Query **for more information.  Once again, this has a “pretty print” variant that prints multi-line, formatted JSON.
+*   **`PrintFhirToJsonStringForAnalytics`**: This converts a FHIR proto to a single-line [Analytic FHIR JSON](https://github.com/FHIR/sql-on-fhir/blob/master/sql-on-fhir.md).  See section [**Analytic Printing and Big Query**](#analytic-printing-and-big-query) for more information.  Once again, this has a “pretty print” variant that prints multi-line, formatted JSON.
 *   **`PrintFhirPrimitive`**: converts a FHIR primitive to the string representation it would have in FHIR.  E.g., a proto **Date** would be converted to “1905-08-23”.
 
 
@@ -247,7 +247,7 @@ In this section, we will describe what Profiles are, what Profiled Protos look l
 
 
 *   **`Patient.name`** has field size **`0..*`** (i.e., no size restrictions, zero-to-infinitely many) in the [main resource definition](http://hl7.org/fhir/patient.html).  However, to conform to the [US-Core profile](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-patient.html) for patient, the Patient.name field must have size **`1..*`** (i.e., “at least one”).  If a patient has zero names, it will be considered **invalid** by US-Core profile.
-*   The US-Core Patient resource specifies three extensions to expect: **`us-core-race`**, **`us-core-ethnicity`**, and **`us-core-birthsex`.  **Each of these is sized to be 0..1 (at most one), and provides the defining url for these extensions.
+*   The US-Core Patient resource specifies three extensions to expect: **`us-core-race`**, **`us-core-ethnicity`**, and **`us-core-birthsex`**.  Each of these is sized to be 0..1 (at most one), and provides the defining url for these extensions.
 
 Profiles like these can be thought of as serving three primary purposes:
 
@@ -269,12 +269,12 @@ Given a profile of a resource, FhirProto will generate a customized version of t
 
 ### Size Changes
 
-**Size Changes** are the most straight forward.  If a field changes from accepting multiple values (a JSON array) to accepting only a single element, the proto field goes from **repeated** to **singular**.  If the field goes from a lower bound of zero to a lower bound of one, it gains the **validation_requirement =** **REQUIRED_BY_FHIR** annotation.  Thus, for example, the field **Patient.name **is marked as required in the [US-Core proto](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/uscore.proto#L4466)
+**Size Changes** are the most straight forward.  If a field changes from accepting multiple values (a JSON array) to accepting only a single element, the proto field goes from **repeated** to **singular**.  If the field goes from a lower bound of zero to a lower bound of one, it gains the **validation_requirement =** **REQUIRED_BY_FHIR** annotation.  Thus, for example, the field **Patient.name** is marked as required in the [US-Core proto](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/uscore.proto#L4466).
 
 
 ### Extension Slicing
 
-Extensions allow defining custom data that can be added to resources and datatypes.  All extensions consist of a url-payload pair, where the url defines the meaning as well as the format of the payload.  Extensions come in two forms: **Simple **and **Complex**.  In both cases, the FhirProto Generator is capable of generating data structures out of extension definitions.
+Extensions allow defining custom data that can be added to resources and datatypes.  All extensions consist of a url-payload pair, where the url defines the meaning as well as the format of the payload.  Extensions come in two forms: **Simple** and **Complex**.  In both cases, the FhirProto Generator is capable of generating data structures out of extension definitions.
 
 **Simple** extensions are extensions where the payload consists entirely of a single FHIR datatype, e.g, string, decimal, or code.  Example: the **[US-Core Birthsex](http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex)** extension is defined to be a **code**, bound to the [Birthsex ValueSet](http://hl7.org/fhir/us/core/STU3/ValueSet-birthsex.html).  In this case, the [generated extension](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/uscore.proto#L834) has a value field with the appropriate code type.  This is a slightly more complicated case because it uses a code type with a bound value set, meaning that the definition also defines a custom submessage (INSERT LINK TO PREVIOUS DISCUSSION OF CODE HANDLING) - in cases with more straightforward datatypes no submessage is needed.  For example, the [Allergy Intolerance Asserted Date](http://hl7.org/fhir/extension-allergyintolerance-asserteddate.html) extension definition just generates a [proto with a DateTime value field](https://github.com/google/fhir/blob/33702125b2310140401a6ff29d4a14ffd9181da9/proto/r4/core/extensions.proto#L3734).
 
@@ -307,7 +307,7 @@ This means we’ll be able to set or get these extensions in nice, programmatic 
 
 ## Moving between Profiles
 
-As we saw above, FhirProto turns things like profiled extensions directly into fields.  At this point, it’s worth stressing that this is just a different **view** of the **same data**.  As long as FHIR data fits a given profile, moving between profiles is **isomorphic**, and represents **no gain or loss **of information.  It’s just a change of form that makes the data **easier to work with**.
+As we saw above, FhirProto turns things like profiled extensions directly into fields.  At this point, it’s worth stressing that this is just a different **view** of the **same data**.  As long as FHIR data fits a given profile, moving between profiles is **isomorphic**, and represents **no gain or loss** of information.  It’s just a change of form that makes the data **easier to work with**.
 
 The “how” here is easy - FhirProto provides a straightforward API for moving between proto representations: **`[ConvertToProfileR4](https://github.com/google/fhir/blob/v0.5.0/cc/google/fhir/r4/profiles.h#L45)`**.  This takes a message in one profile (or base resource), and attempts to convert it to the target profile (or base resource).  If this fails (e.g., an extension is not the correct type, or some validation fails), you’ll get an error status.  It looks like this:
 
@@ -365,7 +365,7 @@ In FhirProto, you define profiles and extensions by writing protos Profiles and 
 1.  There are no external resources to bundle into a `fhir_package`, so instead we skip directly to the gen rule, in this case `gen_fhir_definitions_and_protos`, because we want to generate JSON definitions in addition to protos.  We pass this rule our  `profiles.prototxt` and `extensions.prototxt` config file, along with any other proto `fhir_package`s this package depends on.  **Note:** this rule also defines a `fhir_package`, so you can use list `gen_fhir_definitions_and_protos` as a dependency for other packages that want to inherit from this.
 1.  The protos are then generated using a slightly different command, that points to the `gen_fhir_definitions_and_protos` rule: `generate_definitions_and_protos.sh`
 
-The easiest way to get a sense of how these work is to take a look at the [examples in the fhir-examples repo](https://github.com/google/fhir-examples/tree/master/proto/myprofile), which defines a single profile for Patient.  Looking at `[profiles.prototxt](https://github.com/google/fhir-examples/blob/master/proto/myprofile/profiles.prototxt)`, some things to note:
+The easiest way to get a sense of how these work is to take a look at the [examples in the fhir-examples repo](https://github.com/google/fhir-examples/tree/master/proto/myprofile), which defines a single profile for Patient.  Looking at [`profiles.prototxt`](https://github.com/google/fhir-examples/blob/master/proto/myprofile/profiles.prototxt), some things to note:
 1) The profile extends from base url `http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient`.  This means it will have all the new slices and requirements outlined by US Core.
 2) The profile adds an extension slice called `birthPlace` for extension `http://hl7.org/fhir/StructureDefinition/patient-birthPlace`.  Since this is a core FHIR extension, the proto generator already knows what this looks like.
 3) The profile adds a slice to the `CodeableConcept` field `Patient.maritalStatus` for the Code System `http://terminology.hl7.org/CodeSystem/v3-MaritalStatus` with the name `v3`.
